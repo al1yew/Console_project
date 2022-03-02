@@ -46,14 +46,26 @@ namespace ConsoleProject_1.Services
         {
             foreach (Department department in _departmentlist)
             {
-                if (department.Name == name.Trim().ToString())
+                if (department.Name == name.Trim().ToUpper())
                 {
-                    department.WorkerLimit = workerlimit;
+                    if (department.Employeelist.Length <= workerlimit)
+                    {
+                        department.WorkerLimit = workerlimit;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Your mentioned Limit is not appropriate, there is only {department.Employeelist.Length} places in department.\nPlease try again.");
+                    }
                 }
-                else
+
+                department.SalaryLimit = salarylimit;
+                department.Name = name;
+
+                foreach (Employee employee in department.Employeelist)
                 {
-                    Console.WriteLine("Your mentioned Limit is not appropriate. Please try again.");
+                    employee.DepartmentName = department.Name;
                 }
+                return;
 
             }
         }
@@ -65,12 +77,45 @@ namespace ConsoleProject_1.Services
 
         public void RemoveEmployee(string no, string name, string surname, string position)
         {
-            throw new NotImplementedException();
+            foreach (Department department in _departmentlist)
+            {
+                if (department.Name == name.Trim().ToUpper())
+                {
+                    for (int i = 0; i < department.Employeelist.Length; i++)
+                    {
+                        if (department.Employeelist[i].No == no && department.Employeelist[i].Name == name)
+                        {
+                            department.Employeelist[i] = null;
+
+                            department.Employeelist[i] = department.Employeelist[department.Employeelist.Length - 1];
+
+                            Array.Resize(ref department.Employeelist, department.Employeelist.Length - 1);
+                        }
+                    }
+                }
+            }
         }
 
         public void EditEmployee(string name, string surname, byte age, string position, double salary, string no)
         {
-            throw new NotImplementedException();
+            foreach (Department department in _departmentlist)
+            {
+                if (department.Name == name.Trim().ToUpper())
+                {
+                    foreach (Employee employee in department.Employeelist)
+                    {
+                        if (employee.Name == name.Trim().ToUpper() && employee.Surname == surname.Trim().ToUpper())
+                        {
+                            employee.Name = name;
+                            employee.Surname = surname;
+                            employee.Age = age;
+                            employee.Position = position;
+                            employee.Salary = salary;
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("There is no employee that you have called. Please try again");
         }
     }
 }
