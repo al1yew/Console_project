@@ -7,10 +7,13 @@ namespace ConsoleProject_1.Models
     class Department
     {
         public string Name { get; set; }
+
         public int WorkerLimit { get; set; }
+
         public double SalaryLimit { get; set; }
 
         public Employee[] Employeelist;
+
         public void CalcSalaryAverage()
         {
             double salaryaverage = 0;
@@ -26,6 +29,10 @@ namespace ConsoleProject_1.Models
                 $"which is aproximately {Math.Round(AverageofSalary)}");
         }
 
+
+
+
+
         public void AddEmployees(Employee employee)
         {
             if (Employeelist.Length < WorkerLimit)
@@ -36,6 +43,12 @@ namespace ConsoleProject_1.Models
             Console.WriteLine($"There is no place for new employee. " +
                 $"Please increase the capacity of group.");
         }
+
+
+
+
+
+
         public Department(string name, int workerlimit, double salarylimit)
         {
             Employeelist = new Employee[0];

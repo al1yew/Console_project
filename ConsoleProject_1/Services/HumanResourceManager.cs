@@ -37,6 +37,7 @@ namespace ConsoleProject_1.Services
             {
                 Employee employee = new Employee(name, surname, age, position, salary, departmentname);
                 department.AddEmployees(employee);
+                return; // shto bi ashagidaki cw-ni yazmasin
             }
             Console.WriteLine("There is no Department equal to your input. Please try again.");
         }
