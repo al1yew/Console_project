@@ -8,11 +8,11 @@ namespace ConsoleProject_1.Services
 {
     class HumanResourceManager : IHumanResourceManager
     {
-        private Department[] _departmentlist; 
+        private Department[] _departmentlist;
         public Department[] Departments => _departmentlist;
         public HumanResourceManager()
         {
-            _departmentlist = new Department[0]; 
+            _departmentlist = new Department[0];
         }
 
         public void AddDepartment(string name, int workerlimit, double salarylimit)
@@ -44,12 +44,18 @@ namespace ConsoleProject_1.Services
 
         public void EditDepartments(string name, int workerlimit, double salarylimit)
         {
-            throw new NotImplementedException();
-        }
+            foreach (Department department in _departmentlist)
+            {
+                if (department.Name == name.Trim().ToString())
+                {
+                    department.WorkerLimit = workerlimit;
+                }
+                else
+                {
+                    Console.WriteLine("Your mentioned Limit is not appropriate. Please try again.");
+                }
 
-        public void EditEmployee(string name, string surname, byte age, string position, double salary, string no)
-        {
-            throw new NotImplementedException();
+            }
         }
 
         public void GetDepartments()
@@ -58,6 +64,11 @@ namespace ConsoleProject_1.Services
         }
 
         public void RemoveEmployee(string no, string name, string surname, string position)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditEmployee(string name, string surname, byte age, string position, double salary, string no)
         {
             throw new NotImplementedException();
         }
