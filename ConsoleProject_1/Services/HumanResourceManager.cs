@@ -94,6 +94,7 @@ namespace ConsoleProject_1.Services
                     }
                 }
             }
+            Console.WriteLine("There is no Employee that you are looking for Remove. Please try again.");
         }
 
         public void EditEmployee(string name, string surname, byte age, string position, double salary, string no)
