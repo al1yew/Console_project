@@ -13,17 +13,17 @@ namespace ConsoleProject_1.Models
         public Employee[] Employeelist;
         public void CalcSalaryAverage()
         {
-            //double salaryaverage = 0;
-            //int i = 0;
-            //foreach (Employee employee in Employeelist)
-            //{
-            //    salaryaverage += Employeelist[i].Salary;
-            //    i++;
-            //    // mojno i cerez FOR napisat ya xz kak luchshe
-            //}
-            //double AverageofSalary = salaryaverage / WorkerLimit;
-            //Console.WriteLine($"The average salary in Department is {AverageofSalary}, " +
-            //    $"which is aproximately {Math.Round(AverageofSalary)}");
+            double salaryaverage = 0;
+            int i = 0;
+            foreach (Employee employee in Employeelist)
+            {
+                salaryaverage += Employeelist[i].Salary;
+                i++;
+                // mojno i cerez FOR napisat ya xz kak luchshe
+            }
+            double AverageofSalary = salaryaverage / WorkerLimit;
+            Console.WriteLine($"The average salary in Department is {AverageofSalary}, " +
+                $"which is aproximately {Math.Round(AverageofSalary)}");
         }
 
         public void AddEmployees(Employee employee)
