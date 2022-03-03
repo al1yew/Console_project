@@ -116,7 +116,7 @@ namespace ConsoleProject_1
             double salarylimitint;
             double.TryParse(salarylimitstr, out salarylimitint);
 
-            while (!Regex.IsMatch(salarylimitstr, @"^\d+$") )
+            while (!Regex.IsMatch(salarylimitstr, @"^\d+$"))
             {
                 Console.WriteLine($"\nThe salary limit is not appropriate. Salary limit should be minimum {salarylimitint * 250} for your Salary Limit");
                 salarylimitstr = Console.ReadLine();
