@@ -1,5 +1,8 @@
 ﻿using ConsoleProject_1.Services;
 using System;
+using ConsoleProject_1.Interfaces;
+using ConsoleProject_1.Models;
+using ConsoleProject_1.Services;
 
 namespace ConsoleProject_1
 {
@@ -30,32 +33,48 @@ namespace ConsoleProject_1
                     Console.WriteLine("You need to choice numbers from 1 to 9!");
                     userchoice = Console.ReadLine();
                 }
+
+                Console.Clear();
+
                 Console.WriteLine($"-- We are preparing the process...");
+
 
                 switch (userchoicenum)
                 {
                     case 1:
-                    //budu otpravlat vo vse keysi metodi
+                        GetDepartments(ref humanResourceManager);
+                        break;
                     case 2:
-                    //budu otpravlat vo vse keysi metodi
+                        AddDepartment(ref humanResourceManager);
+                        break;
                     case 3:
-                    //budu otpravlat vo vse keysi metodi
+                        EditDepartment(ref humanResourceManager);
+                        break;
                     case 4:
-                    //budu otpravlat vo vse keysi metodi
+                        GetDepartmentWorkers(ref humanResourceManager);
+                        break;
                     case 5:
-                    //budu otpravlat vo vse keysi metodi
+                        GetWorkersList(ref humanResourceManager);
+                        break;
                     case 6:
-                    //budu otpravlat vo vse keysi metodi
+                        AddEmployee(ref humanResourceManager);
+                        break;
                     case 7:
-                    //budu otpravlat vo vse keysi metodi
+                        EditEmployee(ref humanResourceManager);
+                        break;
                     case 8:
-                        return;
+                        RemoveEmployee(ref humanResourceManager);
+                        break;
+                    case 9:
+                        Console.WriteLine("Thanks for visiting. All the best.");
+                    return;
                 }
-
-
-
-
             } while (true);
+
+
+
+
+
         }
     }
 }
