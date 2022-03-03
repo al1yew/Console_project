@@ -10,7 +10,23 @@ namespace ConsoleProject_1.Models
 
         public int WorkerLimit { get; set; }
 
-        public double SalaryLimit { get; set; }
+        private double _salarylimit;
+
+        public double SalaryLimit
+        {
+            get => _salarylimit;
+            set
+            {
+                while (value < 250*WorkerLimit)
+                {
+                    Console.WriteLine($"Due to fact that 1 worker must have Salary limit must be at least 250 you need to " +
+                        $"increase your input by {250 * WorkerLimit - value}");
+                    double.TryParse(Console.ReadLine(), out value);
+                    break;  // tut inoqda dayet error
+                }
+                value = _salarylimit;
+            }
+        }
 
         public Employee[] Employeelist;
 

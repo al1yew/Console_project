@@ -13,7 +13,25 @@ namespace ConsoleProject_1.Models
         public string Surname { get; set; }
         public byte Age { get; set; }
         public string Position { get; set; }
-        public double Salary { get; set; }
+
+        private double _salary;
+        public double Salary
+        {
+            get => _salary;
+            set
+            {
+                while (value != _salary)
+                {
+                    if (Salary >= 250)
+                    {
+                        _salary = value;
+                    }
+                    Console.WriteLine($"Salary must be at least 250 azn. You need to add {250 - value} azn"); // eto nash else
+                    double.TryParse(Console.ReadLine(), out value);
+                }
+            }
+        }
+
         public string DepartmentName { get; set; }
         public Employee(string name, string surname, byte age, string position, double salary,string departmentname)
         {
