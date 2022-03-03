@@ -47,9 +47,9 @@ namespace ConsoleProject_1
                     case 2:
                         AddDepartment(ref humanResourceManager);
                         break;
-                    //case 3:
-                    //    EditDepartment(ref humanResourceManager);
-                    //    break;
+                    case 3:
+                        EditDepartment(ref humanResourceManager);
+                        break;
                     //case 4:
                     //    GetDepartmentWorkers(ref humanResourceManager);
                     //    break;
@@ -89,11 +89,10 @@ namespace ConsoleProject_1
             }
         }
 
-
         static void AddDepartment(ref HumanResourceManager humanResourceManager) 
         {
             Console.WriteLine("\nWelcome to Department creator.\nPlease write down name of Department that you are going to add:");
-            string name = Console.ReadLine();   /////////////////////
+            string name = Console.ReadLine();   
 
             while (!Regex.IsMatch(name, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(name, @"^\S+(?: \S+)*$"))
             {
@@ -102,7 +101,7 @@ namespace ConsoleProject_1
             }
 
             Console.WriteLine("\nWrite down the worker limit that you are going to implement");
-            string workerlimitstr = Console.ReadLine();   ////////////////////
+            string workerlimitstr = Console.ReadLine();   
             int workerlimitint;
 
             while (!int.TryParse(workerlimitstr, out workerlimitint) || workerlimitint < 1 || workerlimitint > 50)
@@ -112,17 +111,22 @@ namespace ConsoleProject_1
             }
 
             Console.WriteLine("\nWrite down the salary limit that you are going to implement");
-            string salarylimitstr = Console.ReadLine();   ////////////////////
+            string salarylimitstr = Console.ReadLine();   
             double salarylimitint;
             double.TryParse(salarylimitstr, out salarylimitint);
 
             while (!Regex.IsMatch(salarylimitstr, @"^\d+$"))
             {
-                Console.WriteLine($"\nThe salary limit is not appropriate. Salary limit should be minimum {salarylimitint * 250} for your Salary Limit");
-                salarylimitstr = Console.ReadLine();
+                Console.WriteLine($"\nThe salary limit is not appropriate.\n1.Salary limit must be written as numbers.\n2.Salary limit should be minimum {workerlimitint * 250} for your Salary Limit.\nTry again.");
+                salarylimitstr = Console.ReadLine(); // TUT KAKAYA TO PROBLEMA S ZAPOMINANIEM V PAMATI  
             }
 
             humanResourceManager.AddDepartment(name, workerlimitint, salarylimitint);
+        }
+
+        static void EditDepartment(ref HumanResourceManager humanResourceManager) 
+        {
+
         }
     }
 }
