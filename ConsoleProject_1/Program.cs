@@ -126,7 +126,29 @@ namespace ConsoleProject_1
 
         static void EditDepartment(ref HumanResourceManager humanResourceManager) 
         {
+            byte i = 0;
+            if (humanResourceManager.Departments.Length > 0)
+            {
+                Console.WriteLine($"There is {humanResourceManager.Departments.Length} Departments, choose one that you want to edit:");
+                foreach (Department department in humanResourceManager.Departments)
+                {
+                    Console.WriteLine($"{i}. {department}");
+                    i++;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"There are no Departments. Please add them first of all.");
+                return;
+            }
 
+
+
+
+            while ()
+            {
+
+            }
         }
     }
 }
