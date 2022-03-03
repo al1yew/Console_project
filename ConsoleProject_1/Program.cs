@@ -164,6 +164,24 @@ namespace ConsoleProject_1
                     }
                 }
             }
+            Console.WriteLine($"Now set new worker limit in {inputnewdepname}");
+            int inputnum;
+
+            while (!Regex.IsMatch(Console.ReadLine(), @"^\d+$"))
+            {
+
+            }
+
+
+
+
+
+
+
+
+
+            // teper mojno izmenit
+            humanResourceManager.EditDepartment(inputdepname, )
 
 
 
