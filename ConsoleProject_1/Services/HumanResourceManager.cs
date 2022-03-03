@@ -72,7 +72,10 @@ namespace ConsoleProject_1.Services
 
         public void GetDepartments()
         {
-            throw new NotImplementedException();
+            foreach (Department department in _departmentlist)
+            {
+                Console.WriteLine($"{department} Department");
+            }
         }
 
         public void RemoveEmployee(string no, string name, string surname, string position)
