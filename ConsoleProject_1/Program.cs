@@ -90,14 +90,10 @@ namespace ConsoleProject_1
         }
 
 
-
-
-
-
         static void AddDepartment(ref HumanResourceManager humanResourceManager) 
         {
             Console.WriteLine("\nWelcome to Department creator.\nPlease write down name of Department that you are going to add:");
-            string name = Console.ReadLine();/////////////////////
+            string name = Console.ReadLine();   /////////////////////
 
             while (!Regex.IsMatch(name, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(name, @"^\S+(?: \S+)*$"))
             {
@@ -106,25 +102,25 @@ namespace ConsoleProject_1
             }
 
             Console.WriteLine("\nWrite down the worker limit that you are going to implement");
-            string workerlimitstr = Console.ReadLine();////////////////////
+            string workerlimitstr = Console.ReadLine();   ////////////////////
             int workerlimitint;
 
             while (!int.TryParse(workerlimitstr, out workerlimitint) || workerlimitint < 1 || workerlimitint > 50)
             {
-                Console.WriteLine("\nThe worker limit is not appropriate. Choose limit from 1 to 40.");
+                Console.WriteLine("\nThe worker limit is not appropriate. Choose limit from 1 to 50.");
                 workerlimitstr = Console.ReadLine();
             }
 
             Console.WriteLine("\nWrite down the salary limit that you are going to implement");
-            string salarylimitstr = Console.ReadLine();////////////////////
+            string salarylimitstr = Console.ReadLine();   ////////////////////
             double salarylimitint;
+            double.TryParse(salarylimitstr, out salarylimitint);
 
-            while (!double.TryParse(salarylimitstr, out salarylimitint))
+            while (!Regex.IsMatch(salarylimitstr, @"^\d+$") )
             {
-                Console.WriteLine("\nThe salary limit is not appropriate. Salary limit should be minimum {workerlimitint * 250} for your Worker Limit");
-                workerlimitstr = Console.ReadLine();
+                Console.WriteLine($"\nThe salary limit is not appropriate. Salary limit should be minimum {salarylimitint * 250} for your Salary Limit");
+                salarylimitstr = Console.ReadLine();
             }
-
 
             humanResourceManager.AddDepartment(name, workerlimitint, salarylimitint);
         }
