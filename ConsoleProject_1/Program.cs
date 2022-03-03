@@ -2,7 +2,7 @@
 using System;
 using ConsoleProject_1.Interfaces;
 using ConsoleProject_1.Models;
-using ConsoleProject_1.Services;
+using System.Text.RegularExpressions;
 
 namespace ConsoleProject_1
 {
@@ -67,13 +67,34 @@ namespace ConsoleProject_1
                         break;
                     case 9:
                         Console.WriteLine("Thanks for visiting. All the best.");
-                    return;
+                        return;
                 }
             } while (true);
+        }
+        static void GetDepartments(ref HumanResourceManager humanResourceManager)
+        {
+            if (humanResourceManager.Departments.Length > 0)
+            {
+                Console.WriteLine("Departments list:\n");
+                foreach (Department department in humanResourceManager.Departments)
+                {
+                    Console.WriteLine(department);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Sorry but there is no Departments in system. Try to add some.");
+                return;
+            }
+        }
+        static void AddDepartment(ref HumanResourceManager humanResourceManager) 
+        {
+            Console.WriteLine("Welcome to Department creator.\nPlease Write down Name of Department that y ou are going to add:");
+            string input = Console.ReadLine();
+            while (!Regex.IsMatch(input, "[a-zA-Z]")) //nado proverit
+            {
 
-
-
-
+            }
 
         }
     }
