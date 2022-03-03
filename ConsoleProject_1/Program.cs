@@ -91,7 +91,7 @@ namespace ConsoleProject_1
         {
             Console.WriteLine("Welcome to Department creator.\nPlease Write down Name of Department that y ou are going to add:");
             string input = Console.ReadLine();
-            while (!Regex.IsMatch(input, "[a-zA-Z]")) //nado proverit
+            while (!Regex.IsMatch(input, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(input, @"^[a-zA-Z]+$"))
             {
 
             }
