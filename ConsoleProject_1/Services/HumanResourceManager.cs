@@ -70,6 +70,28 @@ namespace ConsoleProject_1.Services
             }
         }
 
+        public void ShowDepartmentWorkers(string name)
+        {
+            foreach (Department department in _departmentlist)
+            {
+                if (department.Name == name.Trim().ToUpper())
+                {
+                    foreach (Employee employee in department.Employeelist)
+                    {
+                        Console.WriteLine($"{employee}\n");
+                    }
+                }
+            }
+        }
+
+        public void GetWorkersList()
+        {
+            foreach (Department department in _departmentlist)
+            {
+                Console.WriteLine(department.Employeelist);
+            }
+        }
+
         public void GetDepartments()
         {
             foreach (Department department in _departmentlist)
