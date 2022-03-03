@@ -89,13 +89,33 @@ namespace ConsoleProject_1
         }
         static void AddDepartment(ref HumanResourceManager humanResourceManager) 
         {
-            Console.WriteLine("Welcome to Department creator.\nPlease Write down Name of Department that y ou are going to add:");
-            string input = Console.ReadLine();
-            while (!Regex.IsMatch(input, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(input, @"^[a-zA-Z]+$"))
+            Console.WriteLine("Welcome to Department creator.\nPlease write down name of Department that you are going to add:");
+            string name = Console.ReadLine();/////////////////////
+            while (!Regex.IsMatch(name, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(name, @"^[a-zA-Z]+$"))
             {
-
+                Console.WriteLine($"Given {name} name for Department is not appropriate. It must not contain something more that letters or whitespaces.");
+                name = Console.ReadLine();
+            }
+            string workerlimitstr = Console.ReadLine();////////////////////
+            int workerlimitint; 
+            while (!int.TryParse(workerlimitstr, out workerlimitint) || workerlimitint < 1 || workerlimitint > 50)
+            {
+                Console.WriteLine($"The worker limit of {workerlimitint} is not appropriate. Choose limit from 1 to 40.");
+                workerlimitstr = Console.ReadLine();
+            }
+            string salarylimitstr = Console.ReadLine();////////////////////
+            int salarylimitint;
+            while (!int.TryParse(salarylimitstr, out salarylimitint))
+            {
+                Console.WriteLine($"The salary limit of {salarylimitint} is not appropriate. Salary limit should be minimum {workerlimitint * 250}");
+                workerlimitstr = Console.ReadLine();
             }
 
+
+
+
+
+            humanResourceManager.AddDepartment(name, workerlimitint, salarylimitint);
         }
     }
 }
