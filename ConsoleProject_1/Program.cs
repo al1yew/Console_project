@@ -126,14 +126,12 @@ namespace ConsoleProject_1
 
         static void EditDepartment(ref HumanResourceManager humanResourceManager) 
         {
-            byte i = 0;
             if (humanResourceManager.Departments.Length > 0)
             {
-                Console.WriteLine($"There is {humanResourceManager.Departments.Length} Departments, choose one that you want to edit:");
+                Console.WriteLine($"There is {humanResourceManager.Departments.Length} Departments, choose the name of one that you want to edit:");
                 foreach (Department department in humanResourceManager.Departments)
                 {
-                    Console.WriteLine($"{i}. {department}");
-                    i++;
+                    Console.WriteLine(department);
                 }
             }
             else
@@ -142,13 +140,37 @@ namespace ConsoleProject_1
                 return;
             }
 
+            Console.WriteLine("Write down the name of department that you want to edit:");
+            string inputdepname = Console.ReadLine(); // eto stariy
 
-
-
-            while ()
+            while (!Regex.IsMatch(inputdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputdepname, @"^\S+(?: \S+)*$"))
             {
-
+                Console.WriteLine($"There is no Department called {inputdepname} in Departments list. Glance again on list.");
+                inputdepname = Console.ReadLine();
             }
+
+            string inputnewdepname = null; // eto noviy uje
+
+            foreach (Department department in humanResourceManager.Departments)
+            {
+                if (department.Name == inputdepname)
+                {
+                    Console.WriteLine($"We have found {inputdepname} Department. Please enter the new name:");
+                    inputnewdepname = Console.ReadLine();
+                    while (!Regex.IsMatch(inputnewdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputnewdepname, @"^\S+(?: \S+)*$"))
+                    {
+                        Console.WriteLine($"Declared {inputnewdepname} name cannot be assigned as Department name. Please use ONLY letters.");
+                        inputnewdepname = Console.ReadLine();
+                    }
+                }
+            }
+
+
+
+
+
+
+
         }
     }
 }
