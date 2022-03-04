@@ -6,9 +6,7 @@ namespace ConsoleProject_1.Models
 {
     class Department
     {
-
         public Employee[] Employeelist;
-
 
         private string _name;
         public string Name 
@@ -18,10 +16,9 @@ namespace ConsoleProject_1.Models
             {
                 while (value.Length < 2)
                 {
-                    Console.WriteLine($"{value} that you wrote is not appropriate. Department Name must contain at least 2 chars. Please try again.");
+                    Console.WriteLine($"{value} that you wrote is not appropriate. Department Name must contain at least 2 chars.\nPlease try again.");
                     value = Console.ReadLine();
                 }
-                // while right olsa assign edir // while sehf hali yoxlamalidi bele ki tekrar console readline istesin
                 _name = value;
             }
         }
@@ -31,18 +28,17 @@ namespace ConsoleProject_1.Models
             get => _workerlimit;
             set
             {
-                while (value < 2)
+                while (value < 1)
                 {
-                    Console.WriteLine($"{value} that you wrote is not appropriate. Position must contain at least 2 chars. Please try again.");
-                    int.TryParse(Console.ReadLine(), out value); // krasota bir setrlik
+                    Console.WriteLine($"{value} that you wrote is not appropriate. Worker limit must be at least 1.\nPlease try again.");
+                    int.TryParse(Console.ReadLine(), out value); 
                 }
-                // while right olsa assign edir // while sehf hali yoxlamalidi bele ki tekrar console readline istesin
                 _workerlimit = value;
             }
         }
 
         private double _salarylimit;
-        public double SalaryLimit // esli pri proverke vvodit snachala bukvu pootom cisla on grabotaet s errorom
+        public double SalaryLimit
         {
             get => _salarylimit;
             set
@@ -75,9 +71,8 @@ namespace ConsoleProject_1.Models
             {
                 allsalary += Employeelist[i].Salary;
                 i++;
-                // mojno i cerez FOR napisat ya xz kak luchshe
             }
-            double AverageofSalary = allsalary / WorkerLimit;
+            double AverageofSalary = allsalary / Employeelist.Length;
             Console.WriteLine($"The average salary in Department is {AverageofSalary}, " +
                 $"which is aproximately {Math.Round(AverageofSalary)}");
         }

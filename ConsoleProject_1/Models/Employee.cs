@@ -24,7 +24,6 @@ namespace ConsoleProject_1.Models
                     Console.WriteLine($"{value} that you wrote is not appropriate. Position must contain at least 2 chars. Please try again.");
                     value = Console.ReadLine();
                 }
-                // while right olsa assign edir // while sehf hali yoxlamalidi bele ki tekrar console readline istesin
                 _position = value;
             }
         }
@@ -37,7 +36,7 @@ namespace ConsoleProject_1.Models
             {
                 while (value < 250)
                 { 
-                    Console.WriteLine($"Salary must be at least 250 azn. You need to add {250 - value} azn"); // eto nash else
+                    Console.WriteLine($"Salary must be at least 250 azn. You need to add {250 - value} azn");
                     double.TryParse(Console.ReadLine(), out value);
                 }
                 _salary = value;
@@ -47,14 +46,14 @@ namespace ConsoleProject_1.Models
         public string DepartmentName { get; set; }
         public Employee(string name, string surname, byte age, string position, double salary, string departmentname)
         {
-            Name = name.Trim().ToUpper();   // nado sdelat tak shto bi ubral white space i sdelal ima familie s bolshoy bukvi perviy indeks
+            Name = name.Trim().ToUpper();
             Surname = surname.Trim().ToUpper();
             Age = age;
             Position = position;
             Salary = salary;
             DepartmentName = departmentname;
             _num++;
-            No = $"{DepartmentName[0].ToString().ToUpper()}{DepartmentName[1].ToString().ToUpper()}{_num}"; // need to check it
+            No = $"{DepartmentName[0].ToString().ToUpper()}{DepartmentName[1].ToString().ToUpper()}{_num}";
         }
         public override string ToString()
         {

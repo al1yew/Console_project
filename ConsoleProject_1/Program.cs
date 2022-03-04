@@ -36,7 +36,7 @@ namespace ConsoleProject_1
 
                 Console.Clear();
 
-                Console.WriteLine($"\n-- We are preparing the process...");
+                Console.WriteLine($"-- We are preparing the process...");
 
 
                 switch (userchoicenum)
@@ -94,9 +94,9 @@ namespace ConsoleProject_1
             Console.WriteLine("\nWelcome to Department creator.\nPlease write down name of Department that you are going to add:");
             string name = Console.ReadLine();   // NAME
 
-            while (!Regex.IsMatch(name, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(name, @"^\S+(?: \S+)*$"))
+            while (name.Length < 2 || !Regex.IsMatch(name, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(name, @"^\S+(?: \S+)*$"))
             {
-                Console.WriteLine($"\nGiven name {name} for Department is not appropriate. It MUST NOT contain something other than letters or whitespaces.");
+                Console.WriteLine($"\nGiven name {name} for Department is not appropriate.\n1.It must contain at least 2 elements.\nIt MUST NOT contain something other than letters or whitespaces.");
                 name = Console.ReadLine();
             }
 
@@ -130,7 +130,15 @@ namespace ConsoleProject_1
         {
             if (humanResourceManager.DepartmentList.Length > 0)
             {
-                Console.WriteLine($"There are {humanResourceManager.DepartmentList.Length} Departments, choose the name of one that you want to edit:");
+                if (humanResourceManager.DepartmentList.Length == 1)
+                {
+                    Console.WriteLine($"There is only one Department.");
+                }
+                else
+                {
+                    Console.WriteLine($"There are {humanResourceManager.DepartmentList.Length} Departments, choose the name of one that you want to edit:");
+                }
+
                 foreach (Department department in humanResourceManager.DepartmentList)
                 {
                     Console.WriteLine(department);
@@ -145,29 +153,33 @@ namespace ConsoleProject_1
             Console.WriteLine("Write down the name of department that you want to edit:");
             string inputdepname = Console.ReadLine(); // eto staroe ima
 
-            while (!Regex.IsMatch(inputdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputdepname, @"^\S+(?: \S+)*$"))
-            {
-                Console.WriteLine($"There is no Department called {inputdepname} in Departments list. Glance again on list."); //isprav 
-                inputdepname = Console.ReadLine();
-            }
-
-            string changedname = null; // eto novoe ima i ono poka shto prosto sozdano 
-
             foreach (Department department in humanResourceManager.DepartmentList)
-            { 
-                if (department.Name == inputdepname.Trim().ToUpper()) 
+            {
+                while (department.Name != inputdepname.Trim().ToUpper())
                 {
-                    Console.WriteLine($"\nWe have found {inputdepname} Department in system. Please enter the new name:\n");
-                    changedname = Console.ReadLine();
-                    while (!Regex.IsMatch(changedname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(changedname, @"^\S+(?: \S+)*$"))
+                    Console.WriteLine($"Declared {inputdepname.Trim().ToUpper()} Department has not been found.\nPlease try again.");
+                    inputdepname = Console.ReadLine();
+                    while (!Regex.IsMatch(inputdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputdepname, @"^\S+(?: \S+)*$"))
                     {
-                        Console.WriteLine($"\nDeclared name cannot be assigned as Department name. Please use ONLY letters.\n");
-                        changedname = Console.ReadLine();
+                        Console.WriteLine($"There is no Department called {inputdepname.Trim().ToUpper()} in Departments list. Glance again on list."); //isprav 
+                        inputdepname = Console.ReadLine();
                     }
                 }
             }
 
-            Console.WriteLine($"\nNow set new worker limit in new created {changedname} department\n");
+            Console.WriteLine($"\nWe have found {inputdepname.Trim().ToUpper()} Department in system. Please enter the new name:\n");
+            
+            string changedname = null;
+
+            changedname = Console.ReadLine();
+
+            while (!Regex.IsMatch(changedname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(changedname, @"^\S+(?: \S+)*$") || changedname.Length < 2)
+            {
+                Console.WriteLine($"\nDeclared {changedname.Trim().ToUpper()} cannot be assigned as Department name.\n1.Please use ONLY letters.\nPlease write at least 2 characters.");
+                changedname = Console.ReadLine();
+            }
+
+            Console.WriteLine($"\nNow set new worker limit in new created {changedname.Trim().ToUpper()} department\n");
 
             string workerlimitstr = Console.ReadLine();
             int workerlimit;
@@ -178,7 +190,7 @@ namespace ConsoleProject_1
                 workerlimitstr = Console.ReadLine();
             }
 
-            Console.WriteLine($"\nNow set new salary limit in new created {changedname} department.\n");
+            Console.WriteLine($"\nNow set new salary limit in new created {changedname.Trim().ToUpper()} department.\n");
             string salarylimitstr = Console.ReadLine();
             double salarylimit;
 
@@ -188,8 +200,101 @@ namespace ConsoleProject_1
                 salarylimitstr = Console.ReadLine();
             }
             Console.WriteLine("Success!");
-            humanResourceManager.EditDepartment(changedname, workerlimit, salarylimit);
-            return; // sdes shto to ne to poetomu return yazdim
+
+            humanResourceManager.EditDepartment(inputdepname, changedname, workerlimit, salarylimit);
+        }
+
+        static void AddEmployee(ref HumanResourceManager humanResourceManager)
+        {
+            if (humanResourceManager.DepartmentList.Length > 0)
+            {
+                if (humanResourceManager.DepartmentList.Length == 1)
+                {
+                    Console.WriteLine($"There is only one Department.");
+                }
+                else
+                {
+                    Console.WriteLine($"There are {humanResourceManager.DepartmentList.Length} Departments, choose the name of one that you want to edit:");
+                }
+                foreach (Department department in humanResourceManager.DepartmentList)
+                {
+                    Console.WriteLine(department);
+                }
+            }
+            else
+            {
+                Console.WriteLine($"\nThere are no Departments. Please add them first of all.");
+                return;
+            }
+
+            Console.WriteLine("Write down the name of department in which you want to add an employee:");
+            string inputdepname = Console.ReadLine();
+
+            foreach (Department department in humanResourceManager.DepartmentList)
+            {
+                while (department.Name != inputdepname.Trim().ToUpper())
+                {
+                    Console.WriteLine($"Declared {inputdepname.Trim().ToUpper()} Department has not been found.\nPlease try again.");
+                    inputdepname = Console.ReadLine();
+                    while (!Regex.IsMatch(inputdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputdepname, @"^\S+(?: \S+)*$"))
+                    {
+                        Console.WriteLine($"There is no Department called {inputdepname.Trim().ToUpper()} in Departments list. Glance again on list."); //isprav 
+                        inputdepname = Console.ReadLine();
+                    }
+                }
+            }
+
+            Console.WriteLine("Success!\nNow write employee Name:");
+            string name = Console.ReadLine();
+
+            while (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+            {
+                Console.WriteLine($"{name} name is written in a wrong way. Use only letters.");
+                name = Console.ReadLine();
+            }
+
+            Console.WriteLine("Success!\nNow write employee Surname:");
+            string surname = Console.ReadLine();
+
+            while (!Regex.IsMatch(surname, @"^[a-zA-Z]+$"))
+            {
+                Console.WriteLine($"{surname} surname is written in a wrong way. Use only letters.");
+                surname = Console.ReadLine();
+            }
+
+            Console.WriteLine("Success!\nWrite employee's Age:");
+            byte age;
+
+            while (!byte.TryParse(Console.ReadLine(), out age))
+            {
+                Console.WriteLine($"Age {age} you wrote is not appropriate. Please use only numbers.");
+                byte.TryParse(Console.ReadLine(), out age);
+            }
+
+            Console.WriteLine("Success!\nWrite employee's position:");
+            string position = Console.ReadLine();
+
+            while (!Regex.IsMatch(position, @"^[a-zA-Z]+$"))
+            {
+                Console.WriteLine($"{position} position is written in a wrong way. Use only letters.");
+                position = Console.ReadLine();
+            }
+
+            Console.WriteLine("Success!\nWrite employee's salary:");
+            double salary;
+
+            while (!double.TryParse(Console.ReadLine(), out salary))
+            {
+                Console.WriteLine($"Salary {salary} you wrote is not appropriate. Please use only Numbers.");
+                double.TryParse(Console.ReadLine(), out salary);
+            }
+
+
+
+
+
+            humanResourceManager.AddEmployee(name, surname, age, position, salary, departmentname);
+
         }
 
         static void GetDepartmentWorkers(ref HumanResourceManager humanResourceManager)
@@ -267,59 +372,7 @@ namespace ConsoleProject_1
             }
         }
 
-        static void AddEmployee(ref HumanResourceManager humanResourceManager) 
-        {
-            if (humanResourceManager.DepartmentList.Length > 0)
-            {
-                Console.WriteLine($"There are {humanResourceManager.DepartmentList.Length} Departments, choose the name of one of them to add an employee:");
-                foreach (Department department in humanResourceManager.DepartmentList)
-                {
-                    Console.WriteLine(department);
-                }
-            }
-            else
-            {
-                Console.WriteLine($"There are no Departments. Please add them first of all.");
-                return;
-            }
-
-            Console.WriteLine("Write down the name of department in which you want to add an employee:");
-            string inputdepname = Console.ReadLine(); 
-
-            while (!Regex.IsMatch(inputdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputdepname, @"^\S+(?: \S+)*$"))
-            {
-                Console.WriteLine($"There is no Department called {inputdepname} in Departments list. Glance again on list."); // isprav
-                inputdepname = Console.ReadLine(); // xz nujno li ispravit etot cw
-            }
-
-            Console.WriteLine("Success!\nNow write employee Name:");
-            string name = Console.ReadLine();
-
-            while (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))
-            {
-                Console.WriteLine($"{name} name is written in a wrong way. Use only letters.");
-                name = Console.ReadLine();
-            }
-
-            Console.WriteLine("Success!\nNow write employee Surname:");
-            string surname = Console.ReadLine();
-
-            while (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))
-            {
-                Console.WriteLine($"{surname} surname is written in a wrong way. Use only letters.");
-                surname = Console.ReadLine();
-            }
-
-            Console.WriteLine("Success!\nWrite employee's Age:");
-            byte age;
-
-            while (!byte.TryParse(Console.ReadLine(), out age))
-            {
-                Console.WriteLine($"Age {age} you wrote is not appropriate. Please use only Numbers.");
-                byte.TryParse(Console.ReadLine(), out age);
-            }
 
 
         }
     }
-}

@@ -42,24 +42,29 @@ namespace ConsoleProject_1.Services
             Console.WriteLine("There is no Department equal to your input. Please try again.");
         }
 
-        public void EditDepartment(string changedname, int workerlimit, double salarylimit)
+        public void EditDepartment(string inputdepname, string changedname, int workerlimit, double salarylimit)
         {
-            foreach (Department department in DepartmentList)
+            foreach (Department department in _departmentlist)
             {
-                if (department.Name == changedname.Trim().ToUpper())
+                if (department.Name == inputdepname.Trim().ToUpper())
                 {
-                    if (department.Employeelist.Length <= workerlimit)
-                    {
-                        department.WorkerLimit = workerlimit;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Your mentioned Limit is not appropriate, there is only {department.Employeelist.Length} places in department.\nPlease try again.");
-                    }
+                    department.Name = changedname.Trim().ToUpper();
+                }
+                else
+                {
+                    Console.WriteLine("\nPlease write the existing name of department in right way.\n");
+                }
+
+                if (workerlimit < 50 && workerlimit > 1)
+                {
+                    department.WorkerLimit = workerlimit;
+                }
+                else
+                {
+                    Console.WriteLine($"Your mentioned Limit is not appropriate, there is only {department.Employeelist.Length} places in department.\nPlease try again.");
                 }
 
                 department.SalaryLimit = salarylimit;
-                department.Name = changedname;
                 // burda nese olmalidi 
 
                 foreach (Employee employee in department.Employeelist)
