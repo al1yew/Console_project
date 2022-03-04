@@ -44,7 +44,7 @@ namespace ConsoleProject_1.Services
 
         public void EditDepartment(string changedname, int workerlimit, double salarylimit)
         {
-            foreach (Department department in _departmentlist)
+            foreach (Department department in Departments)
             {
                 if (department.Name == changedname.Trim().ToUpper())
                 {
@@ -141,6 +141,21 @@ namespace ConsoleProject_1.Services
                 }
             }
             Console.WriteLine("There is no employee that you have called. Please try again");
+        }
+
+        public void GetDepartments(string name, int workerlimit, double salarylimit)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditDepartment(string firstname, string changedname, int workerlimit, double salarylimit)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveEmployee(string no, string position)
+        {
+            throw new NotImplementedException();
         }
     }
 }
