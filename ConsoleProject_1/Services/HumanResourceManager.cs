@@ -46,7 +46,7 @@ namespace ConsoleProject_1.Services
         {
             foreach (Department department in Departments)
             {
-                if (department.Name == changedname.Trim().ToUpper())
+                if (department.Name == char.ToUpper(changedname[0]).ToString())
                 {
                     if (department.Employeelist.Length <= workerlimit)
                     {

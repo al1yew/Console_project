@@ -119,7 +119,7 @@ namespace ConsoleProject_1
                 salarylimitstr = Console.ReadLine(); // TUT KAKAYA TO PROBLEMA S ZAPOMINANIEM V PAMATI  
             }
             double salarylimitint = double.Parse(salarylimitstr);
-
+            Console.WriteLine("Success!");
             humanResourceManager.AddDepartment(name, workerlimitint, salarylimitint);
         }
 
@@ -148,33 +148,41 @@ namespace ConsoleProject_1
                 inputdepname = Console.ReadLine();
             }
 
-            string inputnewdepname = null; // eto novoe ima i ono poka shto prosto sozdano 
+            string changedname = null; // eto novoe ima i ono poka shto prosto sozdano 
 
             foreach (Department department in humanResourceManager.Departments)
             { // tut nado ostorojno v etom nijnem IF ////////////////////////////////////////////*******************//
                 if (department.Name == char.ToUpper(inputdepname[0]).ToString()) // esli vvedennoe nazvanie staroe sovpadayet s kakim to uje imeyushimsa v sisteme
                 {
                     Console.WriteLine($"\nWe have found {inputdepname} Department in system. Please enter the new name:\n");
-                    inputnewdepname = Console.ReadLine();
-                    while (!Regex.IsMatch(inputnewdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputnewdepname, @"^\S+(?: \S+)*$"))
+                    changedname = Console.ReadLine();
+                    while (!Regex.IsMatch(changedname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(changedname, @"^\S+(?: \S+)*$"))
                     {
-                        Console.WriteLine($"\nDeclared {inputnewdepname} name cannot be assigned as Department name. Please use ONLY letters.\n");
-                        inputnewdepname = Console.ReadLine();
+                        Console.WriteLine($"\nDeclared {changedname} name cannot be assigned as Department name. Please use ONLY letters.\n");
+                        changedname = Console.ReadLine();
                     }
                 }
             }
 
-            Console.WriteLine($"Now set new worker limit in new created {inputnewdepname} department\n");
+            Console.WriteLine($"\nNow set new worker limit in new created {changedname} department\n");
 
-            string limitstr = Console.ReadLine();
-            int limitnum;
+            string workerlimitstr = Console.ReadLine();
+            int workerlimit;
 
-            while (!int.TryParse(limitstr, out limitnum) || limitnum < 1 || limitnum > 50)
+            while (!int.TryParse(workerlimitstr, out workerlimit) || workerlimit < 1 || workerlimit > 50)
             {
-                Console.WriteLine("Duzgun Secim Edin:");
-                limitstr = Console.ReadLine();
+                Console.WriteLine("\nWorker limit can be declared only as numbers from 1 to 50.\nTry again:");
+                workerlimitstr = Console.ReadLine();
             }
 
+            string salarylimitstr = Console.ReadLine();
+            double salarylimit;
+
+            while (!double.TryParse(salarylimitstr, out salarylimit) || salarylimit < 250 * workerlimit)
+            {
+                Console.WriteLine("\nSalary limit can be declared only as numbers.\nTry again:");
+                salarylimitstr = Console.ReadLine();
+            }
 
 
 
@@ -193,9 +201,10 @@ namespace ConsoleProject_1
 
 
 
+            Console.WriteLine("Success!");
 
             // teper mojno izmenit
-            //humanResourceManager.EditDepartment(inputdepname, )
+            humanResourceManager.EditDepartment(changedname, workerlimit, salarylimit)
 
 
 
