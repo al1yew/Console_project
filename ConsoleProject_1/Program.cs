@@ -74,10 +74,10 @@ namespace ConsoleProject_1
         }
         static void GetDepartments(ref HumanResourceManager humanResourceManager)
         {
-            if (humanResourceManager.Departments.Length > 0)
+            if (humanResourceManager.DepartmentList.Length > 0)
             {
                 Console.WriteLine("\nDepartments list:\n");
-                foreach (Department department in humanResourceManager.Departments)
+                foreach (Department department in humanResourceManager.DepartmentList)
                 {
                     Console.WriteLine(department);
                 }
@@ -127,10 +127,10 @@ namespace ConsoleProject_1
 
         static void EditDepartment(ref HumanResourceManager humanResourceManager)
         {
-            if (humanResourceManager.Departments.Length > 0)
+            if (humanResourceManager.DepartmentList.Length > 0)
             {
-                Console.WriteLine($"There are {humanResourceManager.Departments.Length} Departments, choose the name of one that you want to edit:");
-                foreach (Department department in humanResourceManager.Departments)
+                Console.WriteLine($"There are {humanResourceManager.DepartmentList.Length} Departments, choose the name of one that you want to edit:");
+                foreach (Department department in humanResourceManager.DepartmentList)
                 {
                     Console.WriteLine(department);
                 }
@@ -152,7 +152,7 @@ namespace ConsoleProject_1
 
             string changedname = null; // eto novoe ima i ono poka shto prosto sozdano 
 
-            foreach (Department department in humanResourceManager.Departments)
+            foreach (Department department in humanResourceManager.DepartmentList)
             { // tut nado ostorojno v etom nijnem IF ////////////////////////////////////////////*******************//
                 if (department.Name == char.ToUpper(inputdepname[0]).ToString()) // eto tocno nepralno proverim
                 {
@@ -193,10 +193,10 @@ namespace ConsoleProject_1
 
         static void GetDepartmentWorkers(ref HumanResourceManager humanResourceManager)
         {
-            if (humanResourceManager.Departments.Length > 0)
+            if (humanResourceManager.DepartmentList.Length > 0)
             {
-                Console.WriteLine($"There are {humanResourceManager.Departments.Length} Departments, choose the name of one of them to get workers it contains:");
-                foreach (Department department in humanResourceManager.Departments)
+                Console.WriteLine($"There are {humanResourceManager.DepartmentList.Length} Departments, choose the name of one of them to get workers it contains:");
+                foreach (Department department in humanResourceManager.DepartmentList)
                 {
                     Console.WriteLine(department);
                 }
@@ -216,7 +216,7 @@ namespace ConsoleProject_1
                 inputdepname = Console.ReadLine();
             }
 
-            foreach (Department department in humanResourceManager.Departments)
+            foreach (Department department in humanResourceManager.DepartmentList)
             {
                 if (department.Name == inputdepname.Trim().ToUpper())
                 {
@@ -240,10 +240,10 @@ namespace ConsoleProject_1
 
         static void GetWorkersList(ref HumanResourceManager humanResourceManager) 
         {
-            if (humanResourceManager.Departments.Length > 0)
+            if (humanResourceManager.DepartmentList.Length > 0)
             {
-                Console.WriteLine($"There are {humanResourceManager.Departments.Length} Departments, choose the name of one of them to get workers it contains:");
-                foreach (Department department in humanResourceManager.Departments)
+                Console.WriteLine($"There are {humanResourceManager.DepartmentList.Length} Departments, choose the name of one of them to get workers it contains:");
+                foreach (Department department in humanResourceManager.DepartmentList)
                 {
                     if (department.Employeelist.Length > 0)
                     {
@@ -268,10 +268,10 @@ namespace ConsoleProject_1
 
         static void AddEmployee(ref HumanResourceManager humanResourceManager) 
         {
-            if (humanResourceManager.Departments.Length > 0)
+            if (humanResourceManager.DepartmentList.Length > 0)
             {
-                Console.WriteLine($"There are {humanResourceManager.Departments.Length} Departments, choose the name of one of them to add an employee:");
-                foreach (Department department in humanResourceManager.Departments)
+                Console.WriteLine($"There are {humanResourceManager.DepartmentList.Length} Departments, choose the name of one of them to add an employee:");
+                foreach (Department department in humanResourceManager.DepartmentList)
                 {
                     Console.WriteLine(department);
                 }

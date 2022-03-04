@@ -93,7 +93,7 @@ namespace ConsoleProject_1.Models
         {
             return $"Name of Department: {_name}\n" +
                 $"Salary Limit for {_name} Department is {_salarylimit}\n" +
-                $"Worker Limit for {_name} Department is {_workerlimit}";
+                $"Worker Limit for {_name} Department is {_workerlimit}"; //dont forget to add colors
         }
     }
 }

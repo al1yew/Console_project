@@ -7,7 +7,7 @@ namespace ConsoleProject_1.Interfaces
 {
     interface IHumanResourceManager
     {
-        Department[] Departments { get; }
+        Department[] DepartmentList { get; }
 
         void AddDepartment(string name, int workerlimit, double salarylimit);
         void EditDepartment(string changedname, int workerlimit, double salarylimit);

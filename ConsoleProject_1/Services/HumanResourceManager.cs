@@ -9,7 +9,7 @@ namespace ConsoleProject_1.Services
     class HumanResourceManager : IHumanResourceManager
     {
         private Department[] _departmentlist;
-        public Department[] Departments => _departmentlist;
+        public Department[] DepartmentList => _departmentlist;
         public HumanResourceManager()
         {
             _departmentlist = new Department[0];
@@ -44,7 +44,7 @@ namespace ConsoleProject_1.Services
 
         public void EditDepartment(string changedname, int workerlimit, double salarylimit)
         {
-            foreach (Department department in Departments)
+            foreach (Department department in DepartmentList)
             {
                 if (department.Name == char.ToUpper(changedname[0]).ToString()) // eto tocno nepravilno ved otpravit tolko perviy char
                 {
