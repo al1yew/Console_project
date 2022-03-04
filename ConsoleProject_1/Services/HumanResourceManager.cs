@@ -60,10 +60,11 @@ namespace ConsoleProject_1.Services
 
                 department.SalaryLimit = salarylimit;
                 department.Name = changedname;
+                // burda nese olmalidi 
 
                 foreach (Employee employee in department.Employeelist)
                 {
-                    employee.DepartmentName = department.Name;
+                    employee.DepartmentName = department.Name; // burda da nese sehvdi char adlarin yazdirmir 
                 }
                 return;
             }
