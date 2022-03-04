@@ -118,6 +118,7 @@ namespace ConsoleProject_1
                 Console.WriteLine($"\nThe salary limit is not appropriate.\n1.Salary limit must be written as numbers.\n2.Salary limit should be minimum {workerlimitint * 250} for your Worker Limit.\nTry again.");
                 salarylimitstr = Console.ReadLine(); // TUT KAKAYA TO PROBLEMA S ZAPOMINANIEM V PAMATI  
             }
+
             double salarylimitint = double.Parse(salarylimitstr);
             Console.WriteLine("Success!");
             humanResourceManager.AddDepartment(name, workerlimitint, salarylimitint);
@@ -152,7 +153,7 @@ namespace ConsoleProject_1
 
             foreach (Department department in humanResourceManager.Departments)
             { // tut nado ostorojno v etom nijnem IF ////////////////////////////////////////////*******************//
-                if (department.Name == char.ToUpper(inputdepname[0]).ToString()) // esli vvedennoe nazvanie staroe sovpadayet s kakim to uje imeyushimsa v sisteme
+                if (department.Name == char.ToUpper(inputdepname[0]).ToString()) // eto tocno nepralno proverim
                 {
                     Console.WriteLine($"\nWe have found {inputdepname} Department in system. Please enter the new name:\n");
                     changedname = Console.ReadLine();
@@ -184,33 +185,13 @@ namespace ConsoleProject_1
                 salarylimitstr = Console.ReadLine();
             }
 
-
-
-
-
-
-
-
-
-            //@"^\d+$"
-
-
-
-
-
-
-
-
             Console.WriteLine("Success!");
-
             // teper mojno izmenit
-            humanResourceManager.EditDepartment(changedname, workerlimit, salarylimit)
+            humanResourceManager.EditDepartment(changedname, workerlimit, salarylimit);
+        }
 
-
-
-
-
-
+        static void GetDepartmentWorkers(ref HumanResourceManager humanResourceManager) 
+        {
 
         }
     }

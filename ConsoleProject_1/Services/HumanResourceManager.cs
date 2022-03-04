@@ -46,7 +46,7 @@ namespace ConsoleProject_1.Services
         {
             foreach (Department department in Departments)
             {
-                if (department.Name == char.ToUpper(changedname[0]).ToString())
+                if (department.Name == char.ToUpper(changedname[0]).ToString()) // eto tocno nepravilno ved otpravit tolko perviy char
                 {
                     if (department.Employeelist.Length <= workerlimit)
                     {
