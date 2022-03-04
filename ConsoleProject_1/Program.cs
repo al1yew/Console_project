@@ -50,12 +50,12 @@ namespace ConsoleProject_1
                     case 3:
                         EditDepartment(ref humanResourceManager);
                         break;
-                    //case 4:
-                    //    GetDepartmentWorkers(ref humanResourceManager);
-                    //    break;
-                    //case 5:
-                    //    GetWorkersList(ref humanResourceManager);
-                    //    break;
+                    case 4:
+                        GetDepartmentWorkers(ref humanResourceManager);
+                        break;
+                    case 5:
+                        GetWorkersList(ref humanResourceManager);
+                        break;
                     //case 6:
                     //    AddEmployee(ref humanResourceManager);
                     //    break;
@@ -84,12 +84,12 @@ namespace ConsoleProject_1
             }
             else
             {
-                Console.WriteLine("\nSorry but there is no Departments in system. Try to add some.\n");
+                Console.WriteLine("\nSorry but there are no Departments in system. Try to add some.\n");
                 return; // ili bez returna
             }
         }
 
-        static void AddDepartment(ref HumanResourceManager humanResourceManager) 
+        static void AddDepartment(ref HumanResourceManager humanResourceManager)
         {
             Console.WriteLine("\nWelcome to Department creator.\nPlease write down name of Department that you are going to add:");
             string name = Console.ReadLine();   // NAME
@@ -123,12 +123,12 @@ namespace ConsoleProject_1
             Console.WriteLine("Success!");
             humanResourceManager.AddDepartment(name, workerlimitint, salarylimitint);
         }
-         
-        static void EditDepartment(ref HumanResourceManager humanResourceManager) 
+
+        static void EditDepartment(ref HumanResourceManager humanResourceManager)
         {
-            if (humanResourceManager.Departments.Length > 0)    
+            if (humanResourceManager.Departments.Length > 0)
             {
-                Console.WriteLine($"There is {humanResourceManager.Departments.Length} Departments, choose the name of one that you want to edit:");
+                Console.WriteLine($"There are {humanResourceManager.Departments.Length} Departments, choose the name of one that you want to edit:");
                 foreach (Department department in humanResourceManager.Departments)
                 {
                     Console.WriteLine(department);
@@ -190,7 +190,54 @@ namespace ConsoleProject_1
             humanResourceManager.EditDepartment(changedname, workerlimit, salarylimit);
         }
 
-        static void GetDepartmentWorkers(ref HumanResourceManager humanResourceManager) 
+        static void GetDepartmentWorkers(ref HumanResourceManager humanResourceManager)
+        {
+            if (humanResourceManager.Departments.Length > 0)
+            {
+                Console.WriteLine($"There are {humanResourceManager.Departments.Length} Departments, choose the name of one of them to get workers it contains:");
+                foreach (Department department in humanResourceManager.Departments)
+                {
+                    Console.WriteLine(department);
+                }
+            } // ESLI EST VASHE V PAMATI DEPARTMANETI YA IX POKAZIVAYU
+            else
+            {
+                Console.WriteLine($"There are no Departments. Please add them first of all.");
+                return;
+            }
+
+            Console.WriteLine("Write down the name of department workers of which you want to get:");
+            string inputdepname = Console.ReadLine();
+
+            while (!Regex.IsMatch(inputdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputdepname, @"^\S+(?: \S+)*$"))
+            {
+                Console.WriteLine($"There is no Department called {inputdepname} in Departments list. Glance again on list.");
+                inputdepname = Console.ReadLine();
+            }
+
+            foreach (Department department in humanResourceManager.Departments)
+            {
+                if (department.Name == inputdepname.Trim().ToUpper())
+                {
+                    if (department.Employeelist.Length > 0)
+                    {
+                        foreach (Employee employee in department.Employeelist)
+                        {
+                            Console.WriteLine(employee);
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"There is no employees in {department} Department. Please add at least one.");
+                        return;
+                    }
+                }
+            }
+            Console.WriteLine($"There is no Department named {inputdepname}. Please try again.");
+        }
+
+        static void GetWorkersList(ref HumanResourceManager humanResourceManager) 
         {
 
         }
