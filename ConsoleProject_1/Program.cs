@@ -239,7 +239,25 @@ namespace ConsoleProject_1
 
         static void GetWorkersList(ref HumanResourceManager humanResourceManager) 
         {
-
+            if (humanResourceManager.Departments.Length > 0)
+            {
+                Console.WriteLine($"There are {humanResourceManager.Departments.Length} Departments, choose the name of one of them to get workers it contains:");
+                foreach (Department department in humanResourceManager.Departments)
+                {
+                    if (department.Employeelist.Length > 0)
+                    {
+                        foreach (Employee employee in department.Employeelist)
+                        {
+                            Console.WriteLine($"Employee Name: {employee}\nDepartment: {department}\nEmployee Number: {employee.No}"); // prover
+                        }
+                    }
+                }
+            } // ESLI EST VASHE V PAMATI DEPARTMANETI YA IX POKAZIVAYU
+            else
+            {
+                Console.WriteLine($"There are no Departments. Please add them first of all.");
+                return;
+            }
         }
     }
 }
