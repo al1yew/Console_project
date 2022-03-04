@@ -10,7 +10,7 @@ namespace ConsoleProject_1.Interfaces
         Department[] Departments { get; }
 
         void AddDepartment(string name, int workerlimit, double salarylimit);
-        void EditDepartment(string firstname, string changedname, int workerlimit, double salarylimit);
+        void EditDepartment(string changedname, int workerlimit, double salarylimit);
         void AddEmployee(string name, string surname, byte age, string position, double salary, string departmentname);
         void RemoveEmployee(string no, /*string name, string surname, */string position);
         void EditEmployee(string name, string surname, byte age, string position, double salary, string no); //kak izmenit nomer on je sam generiruyetsa

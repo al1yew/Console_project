@@ -99,7 +99,7 @@ namespace ConsoleProject_1.Services
             }
         }
 
-        public void RemoveEmployee(string no, string name, string surname, string position)
+        public void RemoveEmployee(string name, string position) // tut cheto ne to nado proverit
         {
             foreach (Department department in _departmentlist)
             {
@@ -107,7 +107,7 @@ namespace ConsoleProject_1.Services
                 {
                     for (int i = 0; i < department.Employeelist.Length; i++)
                     {
-                        if (department.Employeelist[i].No == no && department.Employeelist[i].Name == name)
+                        if (department.Employeelist[i].Name == name && department.Employeelist[i].Name == name)
                         {
                             department.Employeelist[i] = null;
 
@@ -141,21 +141,6 @@ namespace ConsoleProject_1.Services
                 }
             }
             Console.WriteLine("There is no employee that you have called. Please try again");
-        }
-
-        public void GetDepartments(string name, int workerlimit, double salarylimit)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void EditDepartment(string firstname, string changedname, int workerlimit, double salarylimit)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveEmployee(string no, string position)
-        {
-            throw new NotImplementedException();
         }
     }
 }

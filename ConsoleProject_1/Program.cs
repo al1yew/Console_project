@@ -56,9 +56,9 @@ namespace ConsoleProject_1
                     case 5:
                         GetWorkersList(ref humanResourceManager);
                         break;
-                    //case 6:
-                    //    AddEmployee(ref humanResourceManager);
-                    //    break;
+                    case 6:
+                        AddEmployee(ref humanResourceManager);
+                        break;
                     //case 7:
                     //    EditEmployee(ref humanResourceManager);
                     //    break;
@@ -121,6 +121,7 @@ namespace ConsoleProject_1
 
             double salarylimitint = double.Parse(salarylimitstr);
             Console.WriteLine("Success!");
+
             humanResourceManager.AddDepartment(name, workerlimitint, salarylimitint);
         }
 
@@ -145,7 +146,7 @@ namespace ConsoleProject_1
 
             while (!Regex.IsMatch(inputdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputdepname, @"^\S+(?: \S+)*$"))
             {
-                Console.WriteLine($"There is no Department called {inputdepname} in Departments list. Glance again on list.");
+                Console.WriteLine($"There is no Department called {inputdepname} in Departments list. Glance again on list."); //isprav 
                 inputdepname = Console.ReadLine();
             }
 
@@ -251,13 +252,73 @@ namespace ConsoleProject_1
                             Console.WriteLine($"Employee Name: {employee}\nDepartment: {department}\nEmployee Number: {employee.No}"); // prover
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine($"There are no employees in system. Please add them first of all.");
+                        return;
+                    }
                 }
-            } // ESLI EST VASHE V PAMATI DEPARTMANETI YA IX POKAZIVAYU
+            }
             else
             {
                 Console.WriteLine($"There are no Departments. Please add them first of all.");
                 return;
             }
+        }
+
+        static void AddEmployee(ref HumanResourceManager humanResourceManager) 
+        {
+            if (humanResourceManager.Departments.Length > 0)
+            {
+                Console.WriteLine($"There are {humanResourceManager.Departments.Length} Departments, choose the name of one of them to add an employee:");
+                foreach (Department department in humanResourceManager.Departments)
+                {
+                    Console.WriteLine(department);
+                }
+            }
+            else
+            {
+                Console.WriteLine($"There are no Departments. Please add them first of all.");
+                return;
+            }
+
+            Console.WriteLine("Write down the name of department in which you want to add an employee:");
+            string inputdepname = Console.ReadLine(); 
+
+            while (!Regex.IsMatch(inputdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputdepname, @"^\S+(?: \S+)*$"))
+            {
+                Console.WriteLine($"There is no Department called {inputdepname} in Departments list. Glance again on list."); // isprav
+                inputdepname = Console.ReadLine(); // xz nujno li ispravit etot cw
+            }
+
+            Console.WriteLine("Success!\nNow write employee Name:");
+            string name = Console.ReadLine();
+
+            while (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+            {
+                Console.WriteLine($"{name} name is written in a wrong way. Use only letters.");
+                name = Console.ReadLine();
+            }
+
+            Console.WriteLine("Success!\nNow write employee Surname:");
+            string surname = Console.ReadLine();
+
+            while (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+            {
+                Console.WriteLine($"{surname} surname is written in a wrong way. Use only letters.");
+                surname = Console.ReadLine();
+            }
+
+            Console.WriteLine("Success!\nWrite employee's Age:");
+            byte age;
+
+            while (!byte.TryParse(Console.ReadLine(), out age))
+            {
+                Console.WriteLine($"Age {age} you wrote is not appropriate. Please use only Numbers.");
+                byte.TryParse(Console.ReadLine(), out age);
+            }
+
+
         }
     }
 }
