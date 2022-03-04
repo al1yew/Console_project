@@ -46,7 +46,7 @@ namespace ConsoleProject_1.Services
         {
             foreach (Department department in DepartmentList)
             {
-                if (department.Name == char.ToUpper(changedname[0]).ToString()) // eto tocno nepravilno ved otpravit tolko perviy char
+                if (department.Name == changedname.Trim().ToUpper())
                 {
                     if (department.Employeelist.Length <= workerlimit)
                     {
@@ -70,35 +70,35 @@ namespace ConsoleProject_1.Services
             }
         }
 
-        public void GetDepartmentWorkers(string name)
-        {
-            foreach (Department department in _departmentlist)
-            {
-                if (department.Name == name.Trim().ToUpper())
-                {
-                    foreach (Employee employee in department.Employeelist)
-                    {
-                        Console.WriteLine($"{employee}\n");
-                    }
-                }
-            }
-        }
+        //public void GetDepartmentWorkers(string name)
+        //{
+        //    foreach (Department department in _departmentlist)
+        //    {
+        //        if (department.Name == name.Trim().ToUpper())
+        //        {
+        //            foreach (Employee employee in department.Employeelist)
+        //            {
+        //                Console.WriteLine($"{employee}\n");
+        //            }
+        //        }
+        //    }
+        //}
 
-        public void GetWorkersList()
-        {
-            foreach (Department department in _departmentlist)
-            {
-                Console.WriteLine(department.Employeelist);
-            }
-        }
+        //public void GetWorkersList()
+        //{
+        //    foreach (Department department in _departmentlist)
+        //    {
+        //        Console.WriteLine(department.Employeelist);
+        //    }
+        //}
 
-        public void GetDepartments()
-        {
-            foreach (Department department in _departmentlist)
-            {
-                Console.WriteLine($"{department} Department");
-            }
-        }
+        //public void GetDepartments()
+        //{
+        //    foreach (Department department in _departmentlist)
+        //    {
+        //        Console.WriteLine($"{department} Department");
+        //    }
+        //}
 
         public void RemoveEmployee(string name, string position) // tut cheto ne to nado proverit
         {

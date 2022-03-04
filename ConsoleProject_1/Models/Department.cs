@@ -40,8 +40,8 @@ namespace ConsoleProject_1.Models
                 _workerlimit = value;
             }
         }
-        private double _salarylimit;
 
+        private double _salarylimit;
         public double SalaryLimit // esli pri proverke vvodit snachala bukvu pootom cisla on grabotaet s errorom
         {
             get => _salarylimit;
@@ -53,7 +53,7 @@ namespace ConsoleProject_1.Models
                         $"increase your input by {250 * WorkerLimit - value}");
                     double.TryParse(Console.ReadLine(), out value);
                 }
-                value = _salarylimit;
+                _salarylimit = value;
             }
         }
 
@@ -91,9 +91,9 @@ namespace ConsoleProject_1.Models
         }
         public override string ToString()
         {
-            return $"Name of Department: {_name}\n" +
+            return $"Name of Department: {_name} DEPARTMENT\n" +
                 $"Salary Limit for {_name} Department is {_salarylimit}\n" +
-                $"Worker Limit for {_name} Department is {_workerlimit}"; //dont forget to add colors
+                $"Worker Limit for {_name} Department is {_workerlimit}\n"; //dont forget to add colors
         }
     }
 }

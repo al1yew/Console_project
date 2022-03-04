@@ -30,7 +30,7 @@ namespace ConsoleProject_1
                 byte userchoicenum;
                 while (!byte.TryParse(userchoice, out userchoicenum) || userchoicenum < 1 || userchoicenum > 10)
                 {
-                    Console.WriteLine("\nYou need to choice numbers from 1 to 9!\n");
+                    Console.WriteLine("\nYou need to choose numbers from 1 to 9 without using any other symbols.\nTry again\n");
                     userchoice = Console.ReadLine();
                 }
 
@@ -120,9 +120,10 @@ namespace ConsoleProject_1
             }
 
             double salarylimitint = double.Parse(salarylimitstr);
-            Console.WriteLine("Success!");
 
             humanResourceManager.AddDepartment(name, workerlimitint, salarylimitint);
+
+            Console.WriteLine("Success!");
         }
 
         static void EditDepartment(ref HumanResourceManager humanResourceManager)
@@ -134,13 +135,13 @@ namespace ConsoleProject_1
                 {
                     Console.WriteLine(department);
                 }
-            } // ESLI EST VASHE V PAMATI DEPARTMANETI YA IX POKAZIVAYU
+            }
             else
             {
-                Console.WriteLine($"There are no Departments. Please add them first of all.");
+                Console.WriteLine($"\nThere are no Departments. Please add them first of all.");
                 return;
             }
-            // VIBERI ODIN I VVEDI EGO IMA NADO PROVERIT BOLSHIE MELKIE BUKVI TOJE
+
             Console.WriteLine("Write down the name of department that you want to edit:");
             string inputdepname = Console.ReadLine(); // eto staroe ima
 
@@ -153,14 +154,14 @@ namespace ConsoleProject_1
             string changedname = null; // eto novoe ima i ono poka shto prosto sozdano 
 
             foreach (Department department in humanResourceManager.DepartmentList)
-            { // tut nado ostorojno v etom nijnem IF ////////////////////////////////////////////*******************//
-                if (department.Name == char.ToUpper(inputdepname[0]).ToString()) // eto tocno nepralno proverim
+            { 
+                if (department.Name == inputdepname.Trim().ToUpper()) 
                 {
                     Console.WriteLine($"\nWe have found {inputdepname} Department in system. Please enter the new name:\n");
                     changedname = Console.ReadLine();
                     while (!Regex.IsMatch(changedname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(changedname, @"^\S+(?: \S+)*$"))
                     {
-                        Console.WriteLine($"\nDeclared {changedname} name cannot be assigned as Department name. Please use ONLY letters.\n");
+                        Console.WriteLine($"\nDeclared name cannot be assigned as Department name. Please use ONLY letters.\n");
                         changedname = Console.ReadLine();
                     }
                 }
@@ -177,18 +178,18 @@ namespace ConsoleProject_1
                 workerlimitstr = Console.ReadLine();
             }
 
+            Console.WriteLine($"\nNow set new salary limit in new created {changedname} department.\n");
             string salarylimitstr = Console.ReadLine();
             double salarylimit;
 
             while (!double.TryParse(salarylimitstr, out salarylimit) || salarylimit < 250 * workerlimit)
             {
-                Console.WriteLine("\nSalary limit can be declared only as numbers.\nTry again:");
+                Console.WriteLine($"\nSalary limit can be declared only as numbers and must be minimum {workerlimit * 250}.\nTry again:"); //////////////////problema tut on ne govorit dostatochno infi a takje proverit _salary v departaments i taje v service i dopisat remove employee i poslednee shto ostalos
                 salarylimitstr = Console.ReadLine();
             }
-
             Console.WriteLine("Success!");
-            // teper mojno izmenit
             humanResourceManager.EditDepartment(changedname, workerlimit, salarylimit);
+            return; // sdes shto to ne to poetomu return yazdim
         }
 
         static void GetDepartmentWorkers(ref HumanResourceManager humanResourceManager)
