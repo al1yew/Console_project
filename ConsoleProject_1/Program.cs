@@ -123,7 +123,7 @@ namespace ConsoleProject_1
             Console.WriteLine("Success!");
             humanResourceManager.AddDepartment(name, workerlimitint, salarylimitint);
         }
-
+         
         static void EditDepartment(ref HumanResourceManager humanResourceManager) 
         {
             if (humanResourceManager.Departments.Length > 0)    
