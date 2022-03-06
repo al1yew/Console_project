@@ -23,7 +23,7 @@ namespace ConsoleProject_1
                     $"6. -- Add employee\n" +
                     $"7. -- Edit employee\n" +
                     $"8. -- Remove employee\n" +
-                    $"9. -- Calculate Average Salary Of All Workers\n" +
+                    $"9. -- Calculate Average Salary of Departments Workers\n" +
                     $"10.-- Exit\n" +
                     $"+_+_+_+_+_+_+_+_+_+_+_+_+ ");
 
@@ -99,7 +99,7 @@ namespace ConsoleProject_1
             Console.WriteLine("Welcome. You can write the name of department and see workers in it.");
             if (humanResourceManager.DepartmentList.Length > 0)
             {
-                Console.WriteLine($"There are {humanResourceManager.DepartmentList.Length} Departments, choose the name of one of them to get workers it contains:");
+                Console.WriteLine($"There are {humanResourceManager.DepartmentList.Length} Departments, choose the name of one of them to get workers it contains:\n");
                 foreach (Department department in humanResourceManager.DepartmentList)
                 {
                     Console.WriteLine(department.Name);
@@ -180,7 +180,7 @@ namespace ConsoleProject_1
                 Console.WriteLine($"\nThe salary limit is not appropriate.\n1.Salary limit must be written as numbers.\n2.Salary limit should be minimum {workerlimitint * 250} for your Worker Limit.\nTry again.");
                 salarylimitstr = Console.ReadLine();
             }
-
+     
             double salarylimitint = double.Parse(salarylimitstr);
 
             humanResourceManager.AddDepartment(name, workerlimitint, salarylimitint);
@@ -411,7 +411,7 @@ namespace ConsoleProject_1
             {
                 if (department.Employeelist.Length <= 0)
                 {
-                    Console.WriteLine("There is no employees to edit.\nPlease add them first of all");
+                    Console.WriteLine($"There is no employees in {department} to edit.\nPlease add them there first of all");
                 }
                 foreach (Employee employee in department.Employeelist)
                 { 
@@ -430,7 +430,7 @@ namespace ConsoleProject_1
                 no = Console.ReadLine();
             }
 
-            Console.WriteLine("Success!\nNow write employee Name:");
+            Console.WriteLine("Success!\nNow write employee's new Name:");
             string name = Console.ReadLine();
 
             while (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))
@@ -439,7 +439,7 @@ namespace ConsoleProject_1
                 name = Console.ReadLine();
             }
 
-            Console.WriteLine("Success!\nNow write employee Surname:");
+            Console.WriteLine("Success!\nNow write employee's new Surname:");
             string surname = Console.ReadLine();
 
             while (!Regex.IsMatch(surname, @"^[a-zA-Z]+$"))
@@ -448,7 +448,7 @@ namespace ConsoleProject_1
                 surname = Console.ReadLine();
             }
 
-            Console.WriteLine("Success!\nWrite employee's Age:");
+            Console.WriteLine("Success!\nWrite employee's new Age:");
             string agestr = Console.ReadLine();
             byte age = 0;
 
@@ -459,16 +459,16 @@ namespace ConsoleProject_1
                 byte.TryParse(agestr, out age);
             }
 
-            Console.WriteLine("Write employee's position:");
+            Console.WriteLine("Write employee's new position:");
             string position = Console.ReadLine();
 
             while (!Regex.IsMatch(name, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(name, @"^\S+(?: \S+)*$") /*|| position.Length < 2*/)
             {
-                Console.WriteLine($"{ position} position is written in a wrong way.\n1. It must contain only Letters.\n2. It must contain at least 2 symbols.");
+                Console.WriteLine($"{position} position is written in a wrong way.\n1. It must contain only Letters.\n2. It must contain at least 2 symbols.");
                 position = Console.ReadLine();
             }
 
-            Console.WriteLine("\nWrite employee's salary:");
+            Console.WriteLine("Write employee's new salary:");
 
             double salary;
             while (!double.TryParse(Console.ReadLine(), out salary) /*|| salary < 250*/)
@@ -477,7 +477,7 @@ namespace ConsoleProject_1
                 double.TryParse(Console.ReadLine(), out salary);
             }
 
-            Console.WriteLine("\nSelect employee's department name from the list on the top of page:");
+            Console.WriteLine("\nSelect employee's new department name from the list on the top of page:");
             string departmentname = Console.ReadLine();
 
             while (!Regex.IsMatch(departmentname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(departmentname, @"^\S+(?: \S+)*$") || departmentname.Length < 2)
@@ -486,33 +486,29 @@ namespace ConsoleProject_1
                 departmentname = Console.ReadLine();
             }
 
-            humanResourceManager.EditEmployee(name, surname, age, position, salary, no.Trim().ToUpper(), departmentname);
+            humanResourceManager.EditEmployee(name, surname, age, position, salary, no.Trim().ToUpper(), departmentname.Trim().ToUpper());
         }
 
         static void CalcSalaryAverage(ref HumanResourceManager humanResourceManager) 
         {
-            //Department department1 = new Department();
 
-            if (humanResourceManager.DepartmentList.Length > 0)
-            {
-                foreach (Department department in humanResourceManager.DepartmentList)
-                {
-                    if (department.Employeelist.Length > 0)
-                    {
-                        department.CalcSalaryAverage();
-                    }
-                    else
-                    {
-                        Console.WriteLine($"There are no employees in system. Please add them first of all to see Salary Average.");
-                        return;
-                    }
-                }
-            }
-            else
+            if (humanResourceManager.DepartmentList.Length <= 0)
             {
                 Console.WriteLine($"There are no Departments. Please add them first of all.");
                 return;
             }
+            foreach (Department department in humanResourceManager.DepartmentList)
+            {
+                if (department.Employeelist.Length > 0)
+                {
+                    Console.WriteLine($"\nFor {department.Name} Department:");
+                    department.CalcSalaryAverage();
+                    return;
+                }
+                Console.WriteLine($"\nThere are no employees in system. Please add them first of all to see Salary Average.");
+                return;
+            }
+
         }
     }
 }

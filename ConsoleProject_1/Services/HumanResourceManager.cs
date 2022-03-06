@@ -15,7 +15,7 @@ namespace ConsoleProject_1.Services
         {
             _departmentlist = new Department[0];
         }
-
+    
         public void AddDepartment(string name, byte workerlimit, double salarylimit)
         {
             Array.Resize(ref _departmentlist, _departmentlist.Length + 1);
@@ -40,7 +40,7 @@ namespace ConsoleProject_1.Services
                 department.AddEmployees(employee);
                 return;
             }
-            Console.WriteLine("There is no Department equal to your input. Please try again.");
+            Console.WriteLine("There is no Department equal to your input.\nRefresh page and try again.\nDo not forget to glance on list of departments.");
         }
 
         public void EditDepartment(string inputdepname, string changedname, int workerlimit, double salarylimit)
@@ -90,7 +90,7 @@ namespace ConsoleProject_1.Services
                 }
                 else
                 {
-                    Console.WriteLine("There is no Department that you are looking for. Please try again.");
+                    Console.WriteLine("There is no Department that you are looking for.\nRefresh page and try again.\nDo not forget to glance on list of departments.");
                 }
             }
         }
@@ -121,12 +121,8 @@ namespace ConsoleProject_1.Services
                         }
                     }
                 }
-                else
-                {
-                    Console.WriteLine("There is no Department you called, or there is no employees in it.");
-                }
             }
-            
+            Console.WriteLine($"There is no {departmentname} you called, or there is no employees in it.");
         }
 
         public void GetDepartmentWorkers(string departmentname)
@@ -144,7 +140,7 @@ namespace ConsoleProject_1.Services
                     }
                     else
                     {
-                        Console.WriteLine($"There is no Employees in {departmentname}. Please add some");
+                        Console.WriteLine($"There is no Employees in {departmentname.ToUpper()} Department. Please add some");
                         return;
                     }
                 }
@@ -152,6 +148,5 @@ namespace ConsoleProject_1.Services
             Console.WriteLine("Written Department name is declared false");
             return;
         }
-
     }
 }

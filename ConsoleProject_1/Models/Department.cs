@@ -5,7 +5,7 @@ using System.Text;
 namespace ConsoleProject_1.Models
 {
     class Department
-    {
+    { 
         public Employee[] Employeelist;
         //public Department(){}
         private string _name;
@@ -19,7 +19,7 @@ namespace ConsoleProject_1.Models
                     Console.WriteLine($"{value} that you wrote is not appropriate. Department Name must contain at least 2 chars.\nPlease try again.");
                     value = Console.ReadLine();
                 }
-                _name = value;
+                _name = value.Trim().ToUpper();
             }
         }
         private int _workerlimit;
@@ -55,13 +55,13 @@ namespace ConsoleProject_1.Models
 
         public void AddEmployees(Employee employee)
         {
-            if (Employeelist.Length < WorkerLimit)
+            if (Employeelist.Length < WorkerLimit && employee.Salary < SalaryLimit)
             {
                 Array.Resize(ref Employeelist, Employeelist.Length + 1);
                 Employeelist[Employeelist.Length - 1] = employee;
                 return;
             }
-            Console.WriteLine($"There is no place for new employee. Please increase the capacity of Department.");
+            Console.WriteLine($"There is no place for new employee or Salary limit is full.\nPlease increase the capacity of Department or increase Salary limit.\nREMINDER!\nSalary limit is {SalaryLimit}\nWorker Limit is {WorkerLimit}");
         }
 
         public void CalcSalaryAverage()
@@ -76,7 +76,7 @@ namespace ConsoleProject_1.Models
             double AverageofSalary = allsalary / Employeelist.Length;
             if (Employeelist.Length > 0)
             {
-                Console.WriteLine($"The average salary in Department is {AverageofSalary}, " +
+                Console.WriteLine($"The average salary is {AverageofSalary}, " +
                 $"which is aproximately {Math.Round(AverageofSalary)}\n");
                 return;
             }

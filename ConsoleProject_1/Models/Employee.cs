@@ -43,7 +43,7 @@ namespace ConsoleProject_1.Models
                 _salary = value;
             }
         }
-
+     
         public Employee(string name, string surname, byte age, string position, double salary, string departmentname)
         {
             Name = name.Trim().ToUpper();
