@@ -7,7 +7,7 @@ namespace ConsoleProject_1.Models
     class Department
     {
         public Employee[] Employeelist;
-
+        //public Department(){}
         private string _name;
         public string Name 
         {
@@ -19,7 +19,7 @@ namespace ConsoleProject_1.Models
                     Console.WriteLine($"{value} that you wrote is not appropriate. Department Name must contain at least 2 chars.\nPlease try again.");
                     value = Console.ReadLine();
                 }
-                _name = value.Trim().ToUpper();
+                _name = value;
             }
         }
         private int _workerlimit;
@@ -74,8 +74,14 @@ namespace ConsoleProject_1.Models
                 i++;
             }
             double AverageofSalary = allsalary / Employeelist.Length;
-            Console.WriteLine($"The average salary in Department is {AverageofSalary}, " +
-                $"which is aproximately {Math.Round(AverageofSalary)}");
+            if (Employeelist.Length > 0)
+            {
+                Console.WriteLine($"The average salary in Department is {AverageofSalary}, " +
+                $"which is aproximately {Math.Round(AverageofSalary)}\n");
+                return;
+            }
+            Console.WriteLine("There are no employees to calculate average salary");
+            
         }
 
         public Department(string name, int workerlimit, double salarylimit)
@@ -87,9 +93,10 @@ namespace ConsoleProject_1.Models
         }
         public override string ToString()
         {
-            return $"Name of Department: {_name} DEPARTMENT\n" +
-                $"Salary Limit for {_name} Department is {_salarylimit}\n" +
-                $"Worker Limit for {_name} Department is {_workerlimit}\n"; //dont forget to add colors
+            return $"Name of Department: {_name} Department\n" +
+                $"Salary Limit for {_name} Department is: {_salarylimit}\n" +
+                $"Worker Limit for {_name} Department is: {_workerlimit}\n" +
+                $"Workers in it: {Employeelist.Length}\n";
         }
     }
 }

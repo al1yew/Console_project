@@ -11,20 +11,8 @@ namespace ConsoleProject_1.Models
 
         public string Name { get; set; }
         public string Surname { get; set; }
-        private byte _age;
-        public byte Age 
-        {
-            get => _age;
-            set
-            {
-                while (value < 18 && value > 65)
-                {
-                    Console.WriteLine($"{value} that you wrote is not appropriate. Position must contain at least 2 chars. Please try again.");
-                    byte.TryParse(Console.ReadLine(), out value);
-                }
-                _age = value;
-            }
-        }
+        public byte Age { get; set; }
+        public string DepartmentName { get; set; }
 
         private string _position;
         public string Position 
@@ -56,7 +44,6 @@ namespace ConsoleProject_1.Models
             }
         }
 
-        public string DepartmentName { get; set; }
         public Employee(string name, string surname, byte age, string position, double salary, string departmentname)
         {
             Name = name.Trim().ToUpper();
@@ -66,12 +53,12 @@ namespace ConsoleProject_1.Models
             Salary = salary;
             DepartmentName = departmentname;
             _num++;
-            No = $"{DepartmentName[0].ToString().ToUpper()}{DepartmentName[1].ToString().ToUpper()}{_num}";
+            No = $"{char.ToUpper(DepartmentName.ToString()[0])}{DepartmentName[1].ToString().ToUpper()}{_num}";
         }
         public override string ToString()
         {
             return $"Worker:\n" +
-                $"Full Name: {Name} {Surname}\n" +
+                $"Full Name: {Name.ToUpper()} {Surname.ToUpper()}\n" +
                 $"Age: {Age}\n" +
                 $"Position: {_position.Trim().ToUpper()}\n" +
                 $"Salary: {_salary}\n" +

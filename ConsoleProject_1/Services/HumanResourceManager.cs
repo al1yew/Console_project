@@ -27,79 +27,66 @@ namespace ConsoleProject_1.Services
         {
             Department department = null;
 
-            foreach (Department item in DepartmentList)
+            foreach (Department item in _departmentlist)
             {
-                if (item.Name.Trim().ToUpper() != departmentname.Trim().ToUpper())
+                if (item.Name == departmentname.Trim().ToUpper())
                 {
-                    Console.WriteLine($"Declared {departmentname.Trim().ToUpper()} Department has not been found.\nPlease try again.");
-                    departmentname = Console.ReadLine();
-                    while (!Regex.IsMatch(departmentname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(departmentname, @"^\S+(?: \S+)*$"))
-                    {
-                        Console.WriteLine($"There is no Department called {departmentname.Trim().ToUpper()} in Departments list.");
-                        departmentname = Console.ReadLine();
-                    }
+                    department = item;
                 }
-                foreach (Department department1 in _departmentlist)
-                {
-                    if (department1.Name == departmentname.Trim().ToUpper())
-                    {
-                        department = department1;
-                    }
-                }
-                if (department != null)
-                {
-                    Employee employee = new Employee(name, surname, age, position, salary, departmentname);
-                    department.AddEmployees(employee);
-                    return;
-                }
-                Console.WriteLine("There is no Department equal to your input. Please try again.");
             }
+            if (department != null)
+            {
+                Employee employee = new Employee(name, surname, age, position, salary, departmentname);
+                department.AddEmployees(employee);
+                return;
+            }
+            Console.WriteLine("There is no Department equal to your input. Please try again.");
         }
 
         public void EditDepartment(string inputdepname, string changedname, int workerlimit, double salarylimit)
         {
             foreach (Department department in DepartmentList)
             {
-                if (department.Name != inputdepname.Trim().ToUpper())
+                if (department.Name == inputdepname.Trim().ToUpper())
                 {
-                    Console.WriteLine("\nThere is no department that you called.\nPlease, try again.\n");
+                    department.Name = changedname.Trim().ToUpper();
+                    department.WorkerLimit = workerlimit;
+                    department.SalaryLimit = salarylimit;
+
+                    foreach (Employee employee in department.Employeelist)
+                    {
+                        employee.No = employee.No.Replace(employee.No[0], char.ToUpper(changedname.ToString()[0]));
+                        employee.No = employee.No.Replace(employee.No[1], char.ToUpper(changedname.ToString()[1]));
+                    }
                     return;
                 }
-
-                department.Name = changedname.Trim().ToUpper();
-                department.WorkerLimit = workerlimit;
-                department.SalaryLimit = salarylimit;
-
-                foreach (Employee employee in department.Employeelist)
-                {
-                    employee.DepartmentName = department.Name;
-                    employee.No = employee.No.Replace(employee.No[0], char.ToUpper(changedname.ToString()[0]));
-                    employee.No = employee.No.Replace(employee.No[1], char.ToUpper(changedname.ToString()[1]));
-                }
-                return;
             }
+            Console.WriteLine("\nThere is no department that you called.\nPlease, try again.\n");
         }
 
-        public void RemoveEmployee(string no, string name, string surname) // tut cheto ne to nado proverit
+        public void RemoveEmployee(string no, string inputdepname)
         {
             foreach (Department department in _departmentlist)
             {
-                if (department.Name == no.Trim().ToUpper())
+                if (department.Name == inputdepname.Trim().ToUpper())
                 {
                     for (int i = 0; i < department.Employeelist.Length; i++)
                     {
-                        if (department.Employeelist[i].Name == no && department.Employeelist[i].Name == no)
+                        if (department.Employeelist[i].No == no)
                         {
                             department.Employeelist[i] = null;
 
                             department.Employeelist[i] = department.Employeelist[department.Employeelist.Length - 1];
 
                             Array.Resize(ref department.Employeelist, department.Employeelist.Length - 1);
+
+                            return;
                         }
+                        Console.WriteLine("There is no Employee personal NO that you are looking for Remove. Please try again.");
                     }
                 }
+                Console.WriteLine("There is no Department that you are looking for. Please try again.");
             }
-            Console.WriteLine("There is no Employee that you are looking for Remove. Please try again.");
         }
 
         public void EditEmployee(string name, string surname, byte age, string position, double salary, string no, string departmentname)
@@ -110,7 +97,7 @@ namespace ConsoleProject_1.Services
                 {
                     foreach (Employee employee in department.Employeelist)
                     {
-                        if (employee.Name == name.Trim().ToUpper() && employee.Surname == surname.Trim().ToUpper() && employee.No == no.Trim().ToUpper())
+                        if (/*employee.Name.Trim().ToUpper() == name.Trim().ToUpper() && employee.Surname.Trim().ToUpper() == surname.Trim().ToUpper() && */employee.No.Trim().ToUpper() == no.Trim().ToUpper())
                         {
                             employee.Name = name;
                             employee.Surname = surname;
@@ -118,12 +105,44 @@ namespace ConsoleProject_1.Services
                             employee.Position = position;
                             employee.Salary = salary;
                             employee.DepartmentName = departmentname;
-                            // qaldi bidene No su onu da baxariq
+                        }
+                        else
+                        {
+                            Console.WriteLine("Employee's personal NO is written false.");
                         }
                     }
                 }
+                else
+                {
+                    Console.WriteLine("There is no Department you called, or there is no employees in it.");
+                }
             }
-            Console.WriteLine("There is no employee that you have called. Please try again");
+            
         }
+
+        public void GetDepartmentWorkers(string departmentname)
+        {
+            foreach (Department department in DepartmentList)
+            {
+                if (department.Name.Trim().ToUpper() == departmentname.Trim().ToUpper())
+                {
+                    if (department.Employeelist.Length > 0)
+                    {
+                        foreach (Employee employee in department.Employeelist)
+                        {
+                            Console.WriteLine(employee);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"There is no Employees in {departmentname}. Please add some");
+                        return;
+                    }
+                }
+            }
+            Console.WriteLine("Written Department name is declared false");
+            return;
+        }
+
     }
 }
