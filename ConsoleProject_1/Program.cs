@@ -251,6 +251,8 @@ namespace ConsoleProject_1
                 salarylimitstr = Console.ReadLine();
             }
 
+            Console.WriteLine("Success!");
+
             humanResourceManager.EditDepartment(inputdepname, changedname, workerlimit, salarylimit);
         }
 
@@ -332,7 +334,7 @@ namespace ConsoleProject_1
                 Console.WriteLine($"Salary {salary} you wrote is not appropriate.\n1. It must contain only Numbers.\n2.It must be minimum 250.");
                 double.TryParse(Console.ReadLine(), out salary);
             }
-
+            Console.WriteLine("\nSuccess!");
             
             humanResourceManager.AddEmployee(name, surname, age, position, salary, departmentname);
         }
@@ -359,8 +361,25 @@ namespace ConsoleProject_1
                 Console.WriteLine($"\nThere are no Departments. Please add them first of all.");
                 return;
             }
-
             Console.WriteLine("Welcome to employee remover.");
+
+            Console.WriteLine("Here is personal numbers of employees:");
+
+            foreach (Department department in humanResourceManager.DepartmentList)
+            {
+                if (department.Employeelist.Length > 0)
+                {
+                    foreach (Employee employee in department.Employeelist)
+                    {
+                        Console.WriteLine($"No: {employee.No}, Dep: {employee.DepartmentName.ToUpper()}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"There are no employees in system. Please add them first of all.");
+                    return;
+                }
+            }
 
             Console.WriteLine("Now write down the employee's NO:\nReminder!\nEmployee's personal No must be alike AB1234.");
             string no = Console.ReadLine();
@@ -379,7 +398,7 @@ namespace ConsoleProject_1
                 Console.WriteLine($"\nDeclared {inputdepname.Trim().ToUpper()} cannot be assigned as Department name.\n1.Please use ONLY letters.\nPlease write at least 2 characters.");
                 inputdepname = Console.ReadLine();
             }
-
+            Console.WriteLine("Success!");
             humanResourceManager.RemoveEmployee(no, inputdepname);
         }
 
@@ -424,7 +443,7 @@ namespace ConsoleProject_1
             Console.WriteLine("Write down the employee's NO:");
             string no = Console.ReadLine();
 
-            while (!Regex.IsMatch(no, "^.*[a-zA-Z]{2}[0-9]{4}.*$"))  //"^[a-zA-Z]{2}[0-9]{4}$"
+            while (!Regex.IsMatch(no, "^.*[a-zA-Z]{2}[0-9]{4}.*$"))
             {
                 Console.WriteLine($"There is no Employee with {no} No in Department's Employees list.\nThe No of employee must contain 2 letters and 4 numbers.\nTry again:");
                 no = Console.ReadLine();
@@ -485,6 +504,8 @@ namespace ConsoleProject_1
                 Console.WriteLine($"\nDeclared {departmentname} cannot be assigned as Department name.\n1.Please use ONLY letters.\nPlease write at least 2 characters.");
                 departmentname = Console.ReadLine();
             }
+
+            Console.WriteLine("Success!");
 
             humanResourceManager.EditEmployee(name, surname, age, position, salary, no.Trim().ToUpper(), departmentname.Trim().ToUpper());
         }
