@@ -11,7 +11,20 @@ namespace ConsoleProject_1.Models
 
         public string Name { get; set; }
         public string Surname { get; set; }
-        public byte Age { get; set; }
+        private byte _age;
+        public byte Age 
+        {
+            get => _age;
+            set
+            {
+                while (value < 18 && value > 65)
+                {
+                    Console.WriteLine($"{value} that you wrote is not appropriate. Position must contain at least 2 chars. Please try again.");
+                    byte.TryParse(Console.ReadLine(), out value);
+                }
+                _age = value;
+            }
+        }
 
         private string _position;
         public string Position 
@@ -59,12 +72,11 @@ namespace ConsoleProject_1.Models
         {
             return $"Worker:\n" +
                 $"Full Name: {Name} {Surname}\n" +
-                $"Age: {Age}" +
-                $"Position: {_position}\n" +
+                $"Age: {Age}\n" +
+                $"Position: {_position.Trim().ToUpper()}\n" +
                 $"Salary: {_salary}\n" +
-                $"Department Name: {DepartmentName}\n" +
-                $"No: {No}";
-            // tut salary i position takie optm shto mi doljni ix get set sdelat potom prisvoit rabotniku
+                $"Department Name: {DepartmentName.Trim().ToUpper()}\n" +
+                $"No: {No}\n";
         }
     }
 }

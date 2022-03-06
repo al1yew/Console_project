@@ -19,7 +19,7 @@ namespace ConsoleProject_1.Models
                     Console.WriteLine($"{value} that you wrote is not appropriate. Department Name must contain at least 2 chars.\nPlease try again.");
                     value = Console.ReadLine();
                 }
-                _name = value;
+                _name = value.Trim().ToUpper();
             }
         }
         private int _workerlimit;
@@ -46,7 +46,7 @@ namespace ConsoleProject_1.Models
                 while (value < 250*WorkerLimit)
                 {
                     Console.WriteLine($"Due to fact that 1 worker must have Salary limit at least 250 you need to " +
-                        $"increase your input by {250 * WorkerLimit - value}");
+                        $"increase your input by {250 * WorkerLimit - value}.\nIt must be minimum {250 * WorkerLimit}");
                     double.TryParse(Console.ReadLine(), out value);
                 }
                 _salarylimit = value;
@@ -56,9 +56,10 @@ namespace ConsoleProject_1.Models
         public void AddEmployees(Employee employee)
         {
             if (Employeelist.Length < WorkerLimit)
-            {// arraya yigmag lazimdi
+            {
                 Array.Resize(ref Employeelist, Employeelist.Length + 1);
                 Employeelist[Employeelist.Length - 1] = employee;
+                return;
             }
             Console.WriteLine($"There is no place for new employee. Please increase the capacity of Department.");
         }
