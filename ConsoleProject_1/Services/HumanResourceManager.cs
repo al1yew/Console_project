@@ -84,9 +84,9 @@ namespace ConsoleProject_1.Services
                         }
                         else
                         {
-                            Console.WriteLine("There is no Employee personal NO that you are looking for Remove. Please try again.");
+                            Console.WriteLine("There is no Employee personal NO that you are looking for Remove. Please try again."); // eto toje vecno pokazivayet
                         }
-                    }
+                    } 
                 }
                 else
                 {
@@ -118,11 +118,13 @@ namespace ConsoleProject_1.Services
                         else
                         {
                             Console.WriteLine("Employee's personal NO is written false.");
+                            return;
                         }
+                        
                     }
                 }
             }
-            Console.WriteLine($"There is no {departmentname} you called, or there is no employees in it.");
+            Console.WriteLine($"There is no {departmentname} you called, or there is no employees in it."); // sdes vecno pishet eto
         }
 
         public void GetDepartmentWorkers(string departmentname)

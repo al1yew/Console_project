@@ -69,7 +69,7 @@ namespace ConsoleProject_1.Models
             double allsalary = 0;
             int i = 0;
             foreach (Employee employee in Employeelist)
-            {
+            { 
                 allsalary += Employeelist[i].Salary;
                 i++;
             }
