@@ -102,7 +102,7 @@ namespace ConsoleProject_1
                 Console.WriteLine($"There are {humanResourceManager.DepartmentList.Length} Departments, choose the name of one of them to get workers it contains:");
                 foreach (Department department in humanResourceManager.DepartmentList)
                 {
-                    Console.WriteLine(department);
+                    Console.WriteLine(department.Name);
                 }
             }
             else
@@ -376,7 +376,7 @@ namespace ConsoleProject_1
 
             while (!Regex.IsMatch(inputdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputdepname, @"^\S+(?: \S+)*$") /*|| departmentname.Length < 2*/)
             {
-                Console.WriteLine($"\nDeclared {inputdepname} cannot be assigned as Department name.\n1.Please use ONLY letters.\nPlease write at least 2 characters.");
+                Console.WriteLine($"\nDeclared {inputdepname.Trim().ToUpper()} cannot be assigned as Department name.\n1.Please use ONLY letters.\nPlease write at least 2 characters.");
                 inputdepname = Console.ReadLine();
             }
 
@@ -418,6 +418,8 @@ namespace ConsoleProject_1
                     Console.WriteLine(employee); 
                 }
             }
+
+            Console.WriteLine("Welcome to Employee editor.");
 
             Console.WriteLine("Write down the employee's NO:");
             string no = Console.ReadLine();
@@ -484,7 +486,7 @@ namespace ConsoleProject_1
                 departmentname = Console.ReadLine();
             }
 
-            humanResourceManager.EditEmployee(name, surname, age, position, salary, no, departmentname);
+            humanResourceManager.EditEmployee(name, surname, age, position, salary, no.Trim().ToUpper(), departmentname);
         }
 
         static void CalcSalaryAverage(ref HumanResourceManager humanResourceManager) 

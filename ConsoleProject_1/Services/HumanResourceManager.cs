@@ -20,7 +20,7 @@ namespace ConsoleProject_1.Services
         {
             Array.Resize(ref _departmentlist, _departmentlist.Length + 1);
             _departmentlist[_departmentlist.Length - 1] = new Department(name, workerlimit, salarylimit);
-            return;
+            
         }
 
         public void AddEmployee(string name, string surname, byte age, string position, double salary, string departmentname)
@@ -72,7 +72,7 @@ namespace ConsoleProject_1.Services
                 {
                     for (int i = 0; i < department.Employeelist.Length; i++)
                     {
-                        if (department.Employeelist[i].No == no)
+                        if (department.Employeelist[i].No == no.Trim().ToUpper())
                         {
                             department.Employeelist[i] = null;
 
@@ -82,10 +82,16 @@ namespace ConsoleProject_1.Services
 
                             return;
                         }
-                        Console.WriteLine("There is no Employee personal NO that you are looking for Remove. Please try again.");
+                        else
+                        {
+                            Console.WriteLine("There is no Employee personal NO that you are looking for Remove. Please try again.");
+                        }
                     }
                 }
-                Console.WriteLine("There is no Department that you are looking for. Please try again.");
+                else
+                {
+                    Console.WriteLine("There is no Department that you are looking for. Please try again.");
+                }
             }
         }
 
@@ -97,7 +103,7 @@ namespace ConsoleProject_1.Services
                 {
                     foreach (Employee employee in department.Employeelist)
                     {
-                        if (/*employee.Name.Trim().ToUpper() == name.Trim().ToUpper() && employee.Surname.Trim().ToUpper() == surname.Trim().ToUpper() && */employee.No.Trim().ToUpper() == no.Trim().ToUpper())
+                        if (employee.No.Trim().ToUpper() == no.Trim().ToUpper())
                         {
                             employee.Name = name;
                             employee.Surname = surname;
@@ -105,6 +111,9 @@ namespace ConsoleProject_1.Services
                             employee.Position = position;
                             employee.Salary = salary;
                             employee.DepartmentName = departmentname;
+                            //mojno i bez etoqo
+                            employee.No = employee.No.Replace(employee.No[0], char.ToUpper(departmentname.ToString()[0]));
+                            employee.No = employee.No.Replace(employee.No[1], char.ToUpper(departmentname.ToString()[1]));
                         }
                         else
                         {
