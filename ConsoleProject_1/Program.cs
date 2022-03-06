@@ -327,12 +327,14 @@ namespace ConsoleProject_1
             }
 
             Console.WriteLine("Success!\nWrite employee's salary:");
-            
+            string salarystr = Console.ReadLine();
             double salary;
-            while (!double.TryParse(Console.ReadLine(), out salary) /*|| salary < 250*/)
+
+            while (!double.TryParse(salarystr, out salary) /*|| salary < 250*/)
             {
                 Console.WriteLine($"Salary {salary} you wrote is not appropriate.\n1. It must contain only Numbers.\n2.It must be minimum 250.");
-                double.TryParse(Console.ReadLine(), out salary);
+                salarystr = Console.ReadLine();
+                double.TryParse(salarystr, out salary);
             }
             Console.WriteLine("\nSuccess!");
             
@@ -488,15 +490,16 @@ namespace ConsoleProject_1
             }
 
             Console.WriteLine("Write employee's new salary:");
-
+            string salarystr = Console.ReadLine();
             double salary;
-            while (!double.TryParse(Console.ReadLine(), out salary) /*|| salary < 250*/)
+            while (!double.TryParse(salarystr, out salary) /*|| salary < 250*/)
             {
                 Console.WriteLine($"Salary {salary} you wrote is not appropriate.\n1. It must contain only Numbers.\n2.It must be minimum 250.");
-                double.TryParse(Console.ReadLine(), out salary);
+                salarystr = Console.ReadLine();
+                double.TryParse(salarystr, out salary);
             }
 
-            Console.WriteLine("\nSelect employee's new department name from the list on the top of page:");
+            Console.WriteLine("Rewrite employee's department name from the list on the top of page to confirm editing:");
             string departmentname = Console.ReadLine();
 
             while (!Regex.IsMatch(departmentname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(departmentname, @"^\S+(?: \S+)*$") || departmentname.Length < 2)
@@ -526,8 +529,11 @@ namespace ConsoleProject_1
                     department.CalcSalaryAverage();
                     return;
                 }
-                Console.WriteLine($"\nThere are no employees in system. Please add them first of all to see Salary Average.");
-                return;
+                else
+                {
+                    Console.WriteLine($"\nThere are no employees in {department.Name}. Please add them first of all to see Salary Average.");
+                }
+
             }
 
         }

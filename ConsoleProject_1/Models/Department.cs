@@ -80,7 +80,7 @@ namespace ConsoleProject_1.Models
                 $"which is aproximately {Math.Round(AverageofSalary)}\n");
                 return;
             }
-            Console.WriteLine("There are no employees to calculate average salary");
+            Console.WriteLine("There are no employees to calculate average salary\n");
             
         }
 

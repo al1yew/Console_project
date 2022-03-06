@@ -82,16 +82,9 @@ namespace ConsoleProject_1.Services
 
                             return;
                         }
-                        else
-                        {
-                            Console.WriteLine("There is no Employee personal NO that you are looking for Remove. Please try again."); // eto toje vecno pokazivayet
-                        }
                     } 
                 }
-                else
-                {
-                    Console.WriteLine("There is no Department that you are looking for.\nRefresh page and try again.\nDo not forget to glance on list of departments.");
-                }
+                Console.WriteLine("There is no Department that you are looking for.\nRefresh page and try again.\nDo not forget to glance on list of departments and check again employee's NO.");
             }
         }
 
@@ -111,7 +104,6 @@ namespace ConsoleProject_1.Services
                             employee.Position = position;
                             employee.Salary = salary;
                             employee.DepartmentName = departmentname;
-                            //mojno i bez etoqo
                             employee.No = employee.No.Replace(employee.No[0], char.ToUpper(departmentname.ToString()[0]));
                             employee.No = employee.No.Replace(employee.No[1], char.ToUpper(departmentname.ToString()[1]));
                         }
@@ -120,11 +112,9 @@ namespace ConsoleProject_1.Services
                             Console.WriteLine("Employee's personal NO is written false.");
                             return;
                         }
-                        
                     }
                 }
             }
-            Console.WriteLine($"There is no {departmentname} you called, or there is no employees in it."); // sdes vecno pishet eto
         }
 
         public void GetDepartmentWorkers(string departmentname)
