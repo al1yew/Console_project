@@ -109,10 +109,14 @@ namespace ConsoleProject_1.Services
                         }
                         else
                         {
-                            Console.WriteLine("Employee's personal NO is written false.");
+                            Console.WriteLine("Employee's personal NO is written false. Try again.");
                             return;
                         }
                     }
+                }
+                else
+                {
+                    Console.WriteLine("There is no called department. Write it in right way.");
                 }
             }
         }
