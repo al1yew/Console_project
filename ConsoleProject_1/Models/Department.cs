@@ -27,7 +27,7 @@ namespace ConsoleProject_1.Models
             get => _workerlimit;
             set
             {
-                while (value < 1 && value > 51)
+                while (value < 1)
                 {
                     Console.WriteLine($"{value} that you wrote is not appropriate. Worker limit must be at least 1.\nPlease try again.");
                     int.TryParse(Console.ReadLine(), out value); 
