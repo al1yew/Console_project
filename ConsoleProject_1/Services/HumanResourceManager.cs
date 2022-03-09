@@ -92,7 +92,7 @@ namespace ConsoleProject_1.Services
         {
             foreach (Department department in _departmentlist)
             {
-                if (department.Name == departmentname.Trim().ToUpper())
+                if (department.Name == departmentname.Trim().ToUpper() && salary < department.SalaryLimit)
                 {
                     foreach (Employee employee in department.Employeelist)
                     {
