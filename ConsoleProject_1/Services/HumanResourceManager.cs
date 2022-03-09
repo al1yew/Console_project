@@ -20,7 +20,7 @@ namespace ConsoleProject_1.Services
         {
             Array.Resize(ref _departmentlist, _departmentlist.Length + 1);
             _departmentlist[_departmentlist.Length - 1] = new Department(name, workerlimit, salarylimit);
-            
+            return;
         }
 
         public void AddEmployee(string name, string surname, byte age, string position, double salary, string departmentname)
@@ -46,8 +46,8 @@ namespace ConsoleProject_1.Services
         public void EditDepartment(string inputdepname, string changedname, int workerlimit, double salarylimit)
         {
             foreach (Department department in DepartmentList)
-            {
-                if (department.Name == inputdepname.Trim().ToUpper())
+            {   
+                if (department.Name == inputdepname.Trim().ToUpper() && inputdepname != changedname)
                 {
                     department.Name = changedname.Trim().ToUpper();
                     department.WorkerLimit = workerlimit;
