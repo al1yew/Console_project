@@ -542,16 +542,8 @@ namespace ConsoleProject_1
                 no = Console.ReadLine();
             }
 
-            Console.WriteLine("\nWrite employee's department name:");
-            string inputdepname = Console.ReadLine();
-
-            while (!Regex.IsMatch(inputdepname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(inputdepname, @"^\S+(?: \S+)*$"))
-            {
-                Console.WriteLine($"\nDeclared {inputdepname.Trim().ToUpper()} cannot be assigned as Department name.\n1.Please use ONLY letters.\nPlease write at least 2 characters.");
-                inputdepname = Console.ReadLine();
-            }
             Console.WriteLine("BYE!");
-            humanResourceManager.RemoveEmployee(no, inputdepname);
+            humanResourceManager.RemoveEmployee(no, departmentname);
         }
 
         static void CalcSalaryAverage(ref HumanResourceManager humanResourceManager) 
