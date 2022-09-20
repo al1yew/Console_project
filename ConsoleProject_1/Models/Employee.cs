@@ -38,7 +38,7 @@ namespace ConsoleProject_1.Models
                 while (value < 250) 
                 { 
                     Console.WriteLine($"Salary must be at least 250 azn. You need to add {250 - value} azn");
-                    double.TryParse(Console.ReadLine(), out value);
+                    double.TryParse(Console.ReadLine(), out value);  
                 }
                 _salary = value;
             }
